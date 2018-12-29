@@ -18,12 +18,14 @@ const NextPage = {
   }
 }
 
-m.route.prefix('') // reconfig #!
-const r = 'archetypum.github.io/'
-m.route(document.body, r, {
-  r: Main,
-  r + 'nextPage': NextPage
+// m.route.prefix('') // reconfig #!
+// const r = 'archetypum.github.io/'
+m.route(document.body, '/', {
+  '/': Main,
+  '/nextPage': NextPage
 })
 
 // Currently, entering to a link in the webpage directly,
 // makes the page remain in 404.html file. URL is correct but no routing made.
+
+// Still the same.
