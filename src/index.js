@@ -29,3 +29,5 @@ m.route(document.body, '/', {
 // makes the page remain in 404.html file. URL is correct but no routing made.
 
 // Still the same.
+
+// Using hash-bang strategy (by default) now. Everything works as expected.
