@@ -1,15 +1,17 @@
 const m = require('mithril')
 
+let state = {
+  searchedTag: '',
+  searchTag: (e) => state.searchedTag = e.target.value
+}
+
+
 const SearchBox = {
-  value: '',
-  search: (e) => {
-    SearchBox.value = e.target.value
-  },
   view: () => {
     return m('p',
         [
-          m('input[type="text"][placeholder="search a tag"]', {onchange: SearchBox.search}),
-          m('p', SearchBox.value)
+          m('input[type="text"][placeholder="search a tag"]', {onchange: state.searchTag}),
+          m('p', 'You are searching this => ' + state.searchedTag)
         ])
   }
 }
@@ -50,13 +52,24 @@ let base = {
   [t2]: c2
 }
 
+const SearchTag = (targetTag) => {
+  if(targetTag === '') return undefined
+  for(var tag in base){
+    if(tag.includes(targetTag)){
+      return m(ExamplePost, {tags: tag}, base[tag])
+    }
+  }
+}
+
 const Main = {
   view: function(){
     return m('div', [
-      m('h1', 'Hello World! made with Mihtril js'),
+      m('h1', 'Hello World! made with Mithril js'),
       Posts(base),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
+      // m(ExamplePost, {tags: state.searchedTag}, base[state.searchedTag]),
+      SearchTag(state.searchedTag),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
     ])
   }
