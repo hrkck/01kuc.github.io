@@ -1,9 +1,24 @@
 const m = require('mithril')
 
+const SearchBox = {
+  value: '',
+  search: (e) => {
+    SearchBox.value = e.target.value
+  },
+  view: () => {
+    return m('p',
+        [
+          m('input[type="text"][placeholder="search a category"]', {onchange: SearchBox.search}),
+          m('p', SearchBox.value)
+        ])
+  }
+}
+
 const Main = {
   view: function(){
     return m('div', [
       m('h1', 'Hello World! made with Mihtril js'),
+      m(SearchBox),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
     ])
   }
