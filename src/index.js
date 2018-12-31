@@ -1,5 +1,6 @@
 const m = require('mithril')
 
+
 let state = {
   searchedTag: '',
   searchTag: (e) => state.searchedTag = e.target.value
@@ -16,9 +17,12 @@ const SearchBox = {
   }
 }
 
+
 const ExamplePost = {
   oninit: (vnode) => {
     vnode.state.tags = vnode.attrs.tags
+    // Will receive more parameters in the future, such as,
+    // Date, URL etc.
   },
   view: (vnode) => {
     return m('div', [
@@ -31,26 +35,26 @@ const ExamplePost = {
 }
 
 
-const Posts = (tagsAndContents) => {
+const Posts = (base) => {
   let list = []
-  for(var tag in tagsAndContents){
-    let content = tagsAndContents[tag]
-    list.push(
-      m(ExamplePost, {tags: tag}, content)
-    )
+  for(var tags in base){
+    list.push(m(ExamplePost, {tags: tags}, base[tags]))
   }
   return list
 }
+
 
 let t1 = "a,b"
 let t2 = "c,a"
 let c1 = "First Post"
 let c2 = "Second Post"
 
+
 let base = {
   [t1]: c1,
   [t2]: c2
 }
+
 
 const SearchTag = (targetTag) => {
   //  https://stackoverflow.com/a/39893636
@@ -66,6 +70,7 @@ const SearchTag = (targetTag) => {
   return list
 }
 
+
 const Main = {
   view: function(){
     return m('div', [
@@ -80,6 +85,7 @@ const Main = {
   }
 }
 
+
 const NextPage = {
   view: function(){
     return m('div', [
@@ -88,6 +94,7 @@ const NextPage = {
     ])
   }
 }
+
 
 // m.route.prefix('') // reconfig #!
 // const r = 'archetypum.github.io/'
@@ -102,3 +109,6 @@ m.route(document.body, '/', {
 // Still the same.
 
 // Using hash-bang strategy (by default) now. Everything works as expected.
+
+// Still in the game and kickin'
+// https://www.youtube.com/watch?v=ISmgOrhELXs&start_radio=1&list=RDISmgOrhELXs
