@@ -1,15 +1,17 @@
 const m = require('mithril')
 
+let state = {
+  searchedTag: '',
+  searchTag: (e) => state.searchedTag = e.target.value
+}
+
+
 const SearchBox = {
-  value: '',
-  search: (e) => {
-    SearchBox.value = e.target.value
-  },
   view: () => {
     return m('p',
         [
-          m('input[type="text"][placeholder="search a tag"]', {onchange: SearchBox.search}),
-          m('p', SearchBox.value)
+          m('input[type="text"][placeholder="search a tag"]', {onchange: state.searchTag}),
+          m('p', state.searchedTag)
         ])
   }
 }
@@ -53,7 +55,7 @@ let base = {
 const Main = {
   view: function(){
     return m('div', [
-      m('h1', 'Hello World! made with Mihtril js'),
+      m('h1', 'Hello World! made with Mithril js'),
       Posts(base),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
