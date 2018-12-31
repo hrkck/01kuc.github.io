@@ -53,11 +53,14 @@ let base = {
 }
 
 const SearchTag = (targetTag) => {
+  //  https://stackoverflow.com/a/39893636
   if(targetTag === '') return undefined
+  let targetTags = targetTag.split(',') // split into a list
   let list = []
-  for(var tag in base){
-    if(tag.includes(targetTag)){
-      list.push(m(ExamplePost, {tags: tag}, base[tag]))
+
+  for(var originalTags in base){
+    if(targetTags.some(targetTag => originalTags.split(',').includes(targetTag))){
+      list.push(m(ExamplePost, {tags: originalTags}, base[originalTags]))
     }
   }
   return list
