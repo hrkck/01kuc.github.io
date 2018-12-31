@@ -8,9 +8,23 @@ const SearchBox = {
   view: () => {
     return m('p',
         [
-          m('input[type="text"][placeholder="search a category"]', {onchange: SearchBox.search}),
+          m('input[type="text"][placeholder="search a tag"]', {onchange: SearchBox.search}),
           m('p', SearchBox.value)
         ])
+  }
+}
+
+const ExamplePost = {
+  oninit: (vnode) => {
+    vnode.state.tags = vnode.attrs.tags
+  },
+  view: (vnode) => {
+    return m('div', [
+      m('p', [
+        vnode.children,
+        m('span', ', corres. tags => ' + vnode.state.tags)
+      ]),
+    ])
   }
 }
 
@@ -18,6 +32,9 @@ const Main = {
   view: function(){
     return m('div', [
       m('h1', 'Hello World! made with Mihtril js'),
+      m(ExamplePost, {tags: ['a,b']}, "First Post"),
+      m(ExamplePost, {tags: ['c,a']}, "Second Post"),
+      m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
     ])
