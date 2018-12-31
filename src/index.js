@@ -54,11 +54,13 @@ let base = {
 
 const SearchTag = (targetTag) => {
   if(targetTag === '') return undefined
+  let list = []
   for(var tag in base){
     if(tag.includes(targetTag)){
-      return m(ExamplePost, {tags: tag}, base[tag])
+      list.push(m(ExamplePost, {tags: tag}, base[tag]))
     }
   }
+  return list
 }
 
 const Main = {
