@@ -11,7 +11,7 @@ const SearchBox = {
     return m('p',
         [
           m('input[type="text"][placeholder="search a tag"]', {onchange: state.searchTag}),
-          m('p', state.searchedTag)
+          m('p', 'You are searching this => ' + state.searchedTag)
         ])
   }
 }
@@ -52,6 +52,15 @@ let base = {
   [t2]: c2
 }
 
+const SearchTag = (targetTag) => {
+  if(targetTag === '') return undefined
+  for(var tag in base){
+    if(tag.includes(targetTag)){
+      return m(ExamplePost, {tags: tag}, base[tag])
+    }
+  }
+}
+
 const Main = {
   view: function(){
     return m('div', [
@@ -59,6 +68,8 @@ const Main = {
       Posts(base),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
+      // m(ExamplePost, {tags: state.searchedTag}, base[state.searchedTag]),
+      SearchTag(state.searchedTag),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
     ])
   }
