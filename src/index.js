@@ -8,13 +8,10 @@ let state = {
 
 
 const SearchBox = {
-  view: () => {
-    return m('p',
-        [
-          m('input[type="text"][placeholder="search a tag"]', {onchange: state.searchTag}),
-          m('p', 'You are searching this => ' + state.searchedTag)
-        ])
-  }
+  view: () =>
+    m('p',
+      m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, onchange: state.searchTag}),
+      m('p', 'You are searching this => ' + state.searchedTag))
 }
 
 
@@ -23,17 +20,15 @@ const ExamplePost = {
     vnode.state.tags = vnode.attrs.tags
     vnode.state.URL = vnode.attrs.URL
   },
-  view: (vnode) => {
-    return m('div',
+  view: (vnode) =>
+    m('div',
       m('a', {href: '/', oncreate: m.route.link}, "go back!"),
       m('p', vnode.children),
-      m('p', vnode.state.date),
       m('p', 'Categories: ' + vnode.state.tags),
       m('p', 'And my URL is ' + vnode.state.URL),
       m('a', {href: vnode.state.URL, oncreate: m.route.link}, "click here to navigate me! "),
       m('hr')
     )
-  }
 }
 
 
@@ -42,7 +37,6 @@ const Posts = (base, attrs) => {
   let currentPost = undefined
   for(var tags in base){
     currentPost = m(ExamplePost, {tags: tags, URL: attrs[tags]}, base[tags])
-    // currentPost = PostFactory(tags, attrs[tags], base[tags])
     list.push(currentPost)
     routes.addPostRoute(attrs[tags], currentPost)
   }
@@ -77,7 +71,7 @@ const SearchTag = (targetTag) => {
 
   for(var originalTags in base){
     if(targetTags.some(targetTag => originalTags.split(',').includes(targetTag))){
-      list.push(m(ExamplePost, {tags: originalTags}, base[originalTags]))
+      list.push(m(ExamplePost, {tags: originalTags, URL: attrs[originalTags]}, base[originalTags]))
     }
   }
   return list
@@ -85,29 +79,25 @@ const SearchTag = (targetTag) => {
 
 
 const Main = {
-  view: function(){
-    return m('div', [
+  view: () =>
+    m('div',
       m('h1', 'Hello World! made with Mithril js'),
       Posts(base, attrs),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
-      // m(ExamplePost, {tags: state.searchedTag}, base[state.searchedTag]),
       SearchTag(state.searchedTag),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
-    ])
-  }
+    )
 }
 
 
 const NextPage = {
-  view: function(){
-    return m('div', [
+  view: () =>
+    m('div',
       m('p', 'This is the next page.'),
       m('a', {href: '/', oncreate: m.route.link}, 'go back')
-    ])
-  }
+    )
 }
-
 
 
 const routes = {
