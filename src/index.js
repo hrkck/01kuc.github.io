@@ -1,47 +1,12 @@
 const m = require('mithril')
+let state = require('./models/state')
+const routes = require('./models/routes')
 
-
-let state = {
-  searchedTag: '',
-  searchTag: (e) => state.searchedTag = e.target.value
-}
-
-
-const SearchBox = {
-  view: () =>
-    m('p',
-      m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, onchange: state.searchTag}),
-      m('p', 'You are searching this => ' + state.searchedTag))
-}
-
-
-const ExamplePost = {
-  oninit: (vnode) => {
-    vnode.state.tags = vnode.attrs.tags
-    vnode.state.URL = vnode.attrs.URL
-  },
-  view: (vnode) =>
-    m('div',
-      m('a', {href: '/', oncreate: m.route.link}, "go back!"),
-      m('p', vnode.children),
-      m('p', 'Categories: ' + vnode.state.tags),
-      m('p', 'And my URL is ' + vnode.state.URL),
-      m('a', {href: vnode.state.URL, oncreate: m.route.link}, "click here to navigate me! "),
-      m('hr')
-    )
-}
-
-
-const Posts = (base, attrs) => {
-  let list = []
-  let currentPost = undefined
-  for(var tags in base){
-    currentPost = m(ExamplePost, {tags: tags, URL: attrs[tags]}, base[tags])
-    list.push(currentPost)
-    routes.addPostRoute(attrs[tags], currentPost)
-  }
-  return list
-}
+const SearchBox = require('./views/SearchBox')
+const PostTemplate = require('./views/PostTemplate')
+const NextPage = require('./views/NextPage')
+const SearchTag = require('./models/SearchTag')
+const Posts = require('./models/Posts')
 
 
 let t1 = "a,b"
@@ -63,21 +28,6 @@ let attrs = {
 }
 
 
-const SearchTag = (targetTag) => {
-  //  https://stackoverflow.com/a/39893636
-  if(targetTag === '') return undefined
-  let targetTags = targetTag.split(',') // split into a list
-  let list = []
-
-  for(var originalTags in base){
-    if(targetTags.some(targetTag => originalTags.split(',').includes(targetTag))){
-      list.push(m(ExamplePost, {tags: originalTags, URL: attrs[originalTags]}, base[originalTags]))
-    }
-  }
-  return list
-}
-
-
 const Main = {
   view: () =>
     m('div',
@@ -85,32 +35,15 @@ const Main = {
       Posts(base, attrs),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
-      SearchTag(state.searchedTag),
+      SearchTag(state.searchedTag, base, attrs),
       m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
     )
 }
 
 
-const NextPage = {
-  view: () =>
-    m('div',
-      m('p', 'This is the next page.'),
-      m('a', {href: '/', oncreate: m.route.link}, 'go back')
-    )
-}
 
-
-const routes = {
-  routes: {
-    '/': Main,
-    '/nextPage': NextPage
-  },
-  addPostRoute: (key, value) => {
-    routes.routes[key] = {view: () => value} // IMPORTANT Detail
-    // https://mithril.js.org/route.html
-  }
-}
-
+routes.addComponentRoute('/', Main)
+routes.addComponentRoute('/nextPage', NextPage)
 // m.route.prefix('') // reconfig #!
 // const r = 'archetypum.github.io/'
 m.route(document.body, '/', routes.routes)
