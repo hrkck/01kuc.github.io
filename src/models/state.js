@@ -1,4 +1,7 @@
 // ./models/state.js
+// Simple State object
+// Currently needed to hold a state when searching for a post by tag
+
 const m = require('mithril')
 
 
