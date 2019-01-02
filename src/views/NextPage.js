@@ -1,4 +1,6 @@
 // ./views/NextPage.js
+// A demonstration of basic routing in Mithril JS
+
 const m = require('mithril')
 
 const NextPage = {
