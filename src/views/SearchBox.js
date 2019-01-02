@@ -1,4 +1,6 @@
 // ./views/SearchBox.js
+// A simple SearchBox for finding the posts that matter
+
 const m = require('mithril')
 const state = require('../models/state')
 
