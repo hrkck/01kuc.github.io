@@ -41,19 +41,10 @@ const Main = {
 }
 
 
-
 routes.addComponentRoute('/', Main)
 routes.addComponentRoute('/nextPage', NextPage)
-// m.route.prefix('') // reconfig #!
-// const r = 'archetypum.github.io/'
 m.route(document.body, '/', routes.routes)
 
-// Currently, entering to a link in the webpage directly,
-// makes the page remain in 404.html file. URL is correct but no routing made.
-
-// Still the same.
-
-// Using hash-bang strategy (by default) now. Everything works as expected.
 
 // Still in the game and kickin'
-// https://www.youtube.com/watch?v=ISmgOrhELXs&start_radio=1&list=RDISmgOrhELXs
+// https://www.youtube.com/watch?v=rog8ou-ZepE
