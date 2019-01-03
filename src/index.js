@@ -19,12 +19,14 @@ let url2 = '/secondPost'
 
 let base = {
   [t1]: c1,
-  [t2]: c2
+  [t2]: c2,
+  'math,ascii': 'The formula of Integral goes as: `int f(x) dx = F(x) + C`'
 }
 
 let attrs = {
   [t1]: url1,
-  [t2]: url2
+  [t2]: url2,
+  'math,ascii': '/mathjax-example' // does not render when navigated to ???
 }
 
 
