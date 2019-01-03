@@ -16,15 +16,34 @@ let c2 = "Second Post"
 let url1 = 'firstPost'
 let url2 = 'secondPost'
 
+// Currently Mathjax only works in the main page.
+// One solution proposal:
+// MathJax needs to be reloaded each time an expression is given.
+// In react, this problem is solved with the following npm package:
+// https://github.com/wko27/react-mathjax
+// this is the most archaic git repo I could find on the topic:
+// https://github.com/SamyPesse/react-mathjax
+// If the concepts above are applied to Mithril, my problem is also supposed to be solved.
+// So I might as well be the person who introduced Mathjax imlementation to Mithril.
+
+
+let t3 = 'math,ascii'
+let c3 = 'If you click the following link, this Math formula will NOT be displayed correctly. `int f(x) dx = F(x) + C`'
+let url3 = 'mathjax-example'
+
+let load_mathjax = m('script', {type:'text/javascript', async:true, src:'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML'})
+
 
 let base = {
   [t1]: c1,
-  [t2]: c2
+  [t2]: c2,
+  [t3]: [load_mathjax, m('p', c3)]
 }
 
 let attrs = {
   [t1]: url1,
-  [t2]: url2
+  [t2]: url2,
+  [t3]: url3
 }
 
 
