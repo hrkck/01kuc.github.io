@@ -13,8 +13,8 @@ let t1 = "a,b"
 let t2 = "c,a"
 let c1 = "First Post"
 let c2 = "Second Post"
-let url1 = '/firstPost'
-let url2 = '/secondPost'
+let url1 = 'firstPost'
+let url2 = 'secondPost'
 
 
 let base = {
@@ -36,14 +36,14 @@ const Main = {
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
       m(SearchBox),
       SearchTag(state.searchedTag, base, attrs),
-      m('a', {href: '/nextPage/', oncreate: m.route.link}, 'click here to navigate to the next page.')
+      m('a', {href: 'nextPage', oncreate: m.route.link}, 'click here to navigate to the next page.')
     )
 }
 
 
-routes.addComponentRoute('/', Main)
-routes.addComponentRoute('/nextPage', NextPage)
-m.route(document.body, '/', routes.routes)
+routes.addComponentRoute('', Main)
+routes.addComponentRoute('nextPage', NextPage)
+m.route(document.body, '', routes.routes)
 
 
 // Still in the game and kickin'

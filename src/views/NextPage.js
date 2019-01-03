@@ -7,7 +7,7 @@ const NextPage = {
   view: () =>
     m('div',
       m('p', 'This is the next page.'),
-      m('a', {href: '/', oncreate: m.route.link}, 'go back')
+      m('a', {href: '', oncreate: m.route.link}, 'go back')
     )
 }
 

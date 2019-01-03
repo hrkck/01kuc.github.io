@@ -26,8 +26,8 @@ const PostTemplate = {
     vnode.state.URL = vnode.attrs.URL
   },
   view: (vnode) =>
-    m('div',
-      m('a', {href: '/', oncreate: m.route.link}, "go back!"),
+    m('div', {id: vnode.state.URL},
+      m('a', {href: '', oncreate: m.route.link}, "go back!"),
       m('p', vnode.children),
       m('p', 'Categories: ' + vnode.state.tags),
       m('p', 'And my URL is ' + vnode.state.URL),
