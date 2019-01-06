@@ -1,4 +1,6 @@
 const m = require('mithril')
+const renderMath = require('./helpers/katexVnodeConverter')
+
 let state = require('./models/state')
 const routes = require('./models/routes')
 
@@ -11,20 +13,25 @@ const Posts = require('./models/Posts')
 
 let t1 = "a,b"
 let t2 = "c,a"
+let t3 = 'katex,math'
 let c1 = "First Post"
 let c2 = "Second Post"
+let c3 = m('p', 'math ', m('p', renderMath('\\int_0^1 x+\\sqrt{1-x^2} dx = F(x) + C')))
 let url1 = 'firstPost'
 let url2 = 'secondPost'
+let url3 = 'katex-example'
 
 
 let base = {
   [t1]: c1,
-  [t2]: c2
+  [t2]: c2,
+  [t3]: c3
 }
 
 let attrs = {
   [t1]: url1,
-  [t2]: url2
+  [t2]: url2,
+  [t3]: url3
 }
 
 
