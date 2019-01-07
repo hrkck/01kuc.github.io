@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "katex": "^0.10.0",
-    "mithril": "^1.1.6"
+    "mithril": "^1.1.6",
+    "showdown": "^1.9.0"
   },
   "devDependencies": {
     "webpack": "^4.28.2",
