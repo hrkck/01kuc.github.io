@@ -1,10 +1,10 @@
 // ./views/PostTemplate.js
 // Anatomy of a Post
 // Later, a post must have capabilities of
-// - rendering mathematical expressions,
+// - rendering mathematical expressions, (done)
 // - rendering graph of a function(s)
 // - rendering highlighted code of many languages
-// - looking readable on devices
+// - looking good readable on devices
 // - having a structure (tags, titles, content itself)
 
 // The aim of this hussle is to be able to create a simple blogging experience
