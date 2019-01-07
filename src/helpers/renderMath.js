@@ -1,14 +1,18 @@
 // ./helpers/renderMath.js
 // Converts:
-// TeX math expressions => html => mithril vnodes
+// ASCII math expression => TeX math expressions => html => Hyperscript
 
+const m = require('mithril')
 const katex = require('katex')
-const templateBuilder = require('./htmltohypertext')
+const htmlToHyperscript = require('./htmlToHyperscript')
+const AsciiMathParser = require('./asciimath2tex')
 
-module.exports = (exp) => {
-  const m = require('mithril')
+const parser = new AsciiMathParser()
+
+
+const renderMath = (exp) => {
   try {
-    const f = Function('m', "return " + templateBuilder({source: katex.renderToString(exp)}))
+    const f = Function('m', "return " + htmlToHyperscript({source: katex.renderToString(parser.parse(exp))}))
     return f(m)
   }catch (e) {
     if (e instanceof katex.ParseError) {
@@ -17,6 +21,9 @@ module.exports = (exp) => {
     }
   }
 }
+
+
+module.exports = renderMath
 
 // REFERENCES:
 // https://stackoverflow.com/questions/54058166/evaluate-a-function-call-given-as-a-string-which-was-declared-with-require

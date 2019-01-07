@@ -2,10 +2,10 @@
 // Anatomy of a Post
 // Later, a post must have capabilities of
 // - rendering mathematical expressions, (done)
-// - rendering graph of a function(s)
+// - rendering graph of a function(s) (done)
 // - rendering highlighted code of many languages
 // - looking good readable on devices
-// - having a structure (tags, titles, content itself)
+// - having a structure (tags, titles, content itself) (partially done)
 
 // The aim of this hussle is to be able to create a simple blogging experience
 // with simple Markdown editing, instant live update and deploying by a simple command

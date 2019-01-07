@@ -22,8 +22,8 @@ let t3 = 'katex,math'
 let t4 = 'plot,draw'
 let c1 = "First Post"
 let c2 = renderMarkdown('# hello, markdown!')
-let c3 = m('p', 'math ', m('p', renderMath('\\int_0^1 x+\\sqrt{1-x^2} dx = F(x) + C')))
-let c4 = m('div', renderGraph('Math.sin(x)', 'Math.cos(x)', 'x'))
+let c3 = m('p', 'math ', m('p', renderMath('sum_(i=1)^n i^3=((n(n+1))/2)^2')))
+let c4 = m('div', renderGraph('Math.sin(x)', 'Math.cos(x)', 'x', 'Math.pow(x,2)'))
 let url1 = 'firstPost'
 let url2 = 'secondPost'
 let url3 = 'katex-example'

@@ -2,7 +2,7 @@
 // Draw a functional graph
 
 const m = require('mithril')
-const draw = require('../helpers/draw')
+const draw = require('../helpers/drawFunction')
 
 const Graph = {
   view: (vnode) =>
