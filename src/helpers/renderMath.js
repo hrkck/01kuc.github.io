@@ -1,10 +1,14 @@
+// ./helpers/renderMath.js
+// Converts:
+// TeX math expressions => html => mithril vnodes
+
 const katex = require('katex')
 const templateBuilder = require('./htmltohypertext')
 
 module.exports = (exp) => {
   const m = require('mithril')
   try {
-    const f = Function('m', 'exp', "return " + templateBuilder({source: katex.renderToString(exp)}))
+    const f = Function('m', "return " + templateBuilder({source: katex.renderToString(exp)}))
     return f(m)
   }catch (e) {
     if (e instanceof katex.ParseError) {

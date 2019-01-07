@@ -1,8 +1,8 @@
 const m = require('mithril')
 
 
-const renderMarkdown = require('./helpers/markdownVnodeConverter')
-const renderMath = require('./helpers/katexVnodeConverter')
+const renderMarkdown = require('./helpers/renderMarkdown')
+const renderMath = require('./helpers/renderMath')
 const draw = require('./helpers/draw')
 
 let state = require('./models/state')

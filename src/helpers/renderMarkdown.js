@@ -1,3 +1,7 @@
+// ./helpers/renderMarkdown.js
+// Converts:
+// markdown => html => mithril vnodes
+
 const templateBuilder = require('./htmltohypertext')
 const showdown = require('showdown')
 const converter = new showdown.Converter()
