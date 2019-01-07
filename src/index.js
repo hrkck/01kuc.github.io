@@ -1,9 +1,8 @@
 const m = require('mithril')
 
-
-const renderMarkdown = require('./helpers/markdownVnodeConverter')
-const renderMath = require('./helpers/katexVnodeConverter')
-const draw = require('./helpers/draw')
+const renderGraph = require('./helpers/renderGraph')
+const renderMarkdown = require('./helpers/renderMarkdown')
+const renderMath = require('./helpers/renderMath')
 
 let state = require('./models/state')
 const routes = require('./models/routes')
@@ -24,7 +23,7 @@ let t4 = 'plot,draw'
 let c1 = "First Post"
 let c2 = renderMarkdown('# hello, markdown!')
 let c3 = m('p', 'math ', m('p', renderMath('\\int_0^1 x+\\sqrt{1-x^2} dx = F(x) + C')))
-let c4 = m('div', m(Graph, {funcs: ['Math.sin(x)', 'Math.cos(x)', 'x']})) // draw([Math.sin(1)], m('canvas', {width: 300, height:100}))
+let c4 = m('div', renderGraph('Math.sin(x)', 'Math.cos(x)', 'x'))
 let url1 = 'firstPost'
 let url2 = 'secondPost'
 let url3 = 'katex-example'
