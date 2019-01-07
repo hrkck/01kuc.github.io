@@ -1,14 +1,18 @@
 // ./helpers/renderMath.js
 // Converts:
-// TeX math expressions => html => mithril vnodes
+// ASCII math expression => TeX math expressions => html => mithril vnodes
 
+const m = require('mithril')
 const katex = require('katex')
 const templateBuilder = require('./htmltohypertext')
+const AsciiMathParser = require('./asciimath2tex')
+
+const parser = new AsciiMathParser()
+
 
 module.exports = (exp) => {
-  const m = require('mithril')
   try {
-    const f = Function('m', "return " + templateBuilder({source: katex.renderToString(exp)}))
+    const f = Function('m', "return " + templateBuilder({source: katex.renderToString(parser.parse(exp))}))
     return f(m)
   }catch (e) {
     if (e instanceof katex.ParseError) {
