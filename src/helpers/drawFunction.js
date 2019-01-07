@@ -18,7 +18,7 @@ const colors = [
   'red',
   'blue',
   'green',
-  'pink',
+  'magenta',
   'purple',
   'yellow',
   'darkred',
