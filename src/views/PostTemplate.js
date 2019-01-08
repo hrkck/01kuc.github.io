@@ -3,7 +3,7 @@
 // Later, a post must have capabilities of
 // - rendering mathematical expressions, (done)
 // - rendering graph of a function(s) (done)
-// - rendering highlighted code of many languages
+// - rendering highlighted code of many languages (done, but more to do)
 // - looking good readable on devices
 // - having a structure (tags, titles, content itself) (partially done)
 
@@ -19,11 +19,15 @@
 // For my own part, I currently have a friendly experience with VNodes
 
 const m = require('mithril')
+const microlight = require('../helpers/microlight')
 
 const PostTemplate = {
   oninit: (vnode) => {
     vnode.state.tags = vnode.attrs.tags
     vnode.state.URL = vnode.attrs.URL
+  },
+  oncreate: () => {
+    microlight.reset();
   },
   view: (vnode) =>
     m('div', {id: vnode.state.URL},

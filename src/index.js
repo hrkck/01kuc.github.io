@@ -3,6 +3,7 @@ const m = require('mithril')
 const renderGraph = require('./helpers/renderGraph')
 const renderMarkdown = require('./helpers/renderMarkdown')
 const renderMath = require('./helpers/renderMath')
+const renderHTML = require('./helpers/renderHTML')
 
 let state = require('./models/state')
 const routes = require('./models/routes')
@@ -20,28 +21,51 @@ let t1 = "a,b"
 let t2 = "c,a"
 let t3 = 'katex,math'
 let t4 = 'plot,draw'
+let t5 = 'code,javascript,highlight'
 let c1 = "First Post"
 let c2 = renderMarkdown('# hello, markdown!')
 let c3 = m('p', 'math ', m('p', renderMath('sum_(i=1)^n i^3=((n(n+1))/2)^2')))
 let c4 = m('div', renderGraph('Math.sin(x)', 'Math.cos(x)', 'x', 'Math.pow(x,2)'))
+let c5 = m('div',
+          m('pre.microlight.line-numbers', m('code',
+`const renderMath = (exp) => {
+  try {
+    const f = Function('m', "return " + htmlToHyperscript({source: katex.renderToString(parser.parse(exp))}))
+    return f(m)
+  }catch (e) {
+    if (e instanceof katex.ParseError) {
+        // KaTeX can't parse the expression
+        return ("Error in LaTeX '" + exp + "': " + e.message).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  }
+}`
+        )),
+      m('p', "here is an inline code ", m('code.microlight', `console.log('1+1')`), " snippet"))
+
+
+
+
 let url1 = 'firstPost'
 let url2 = 'secondPost'
 let url3 = 'katex-example'
 let url4 = 'plot-example'
+let url5 = 'code-highlight'
 
 
 let base = {
   [t1]: c1,
   [t2]: c2,
   [t3]: c3,
-  [t4]: c4
+  [t4]: c4,
+  [t5]: c5
 }
 
 let attrs = {
   [t1]: url1,
   [t2]: url2,
   [t3]: url3,
-  [t4]: url4
+  [t4]: url4,
+  [t5]: url5
 }
 
 
