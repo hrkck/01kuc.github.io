@@ -36,12 +36,12 @@ const draw = (e) => {
 
   let axes = {}
   let ctx = canvas.getContext("2d")
-  axes.x0 = .5*canvas.width  // x0 pixels from left to x=0
-  axes.y0 = .5*canvas.height // y0 pixels from top to y=0
-  axes.scale = canvas.width/(2*10)// 18 pixels from x=0 to x=1 !! WOW MATH! or max '10' intervals! VERY IMPORTANT VAR
+  axes.x0 = 0 + .5*canvas.width  // x0 pixels from left to x=0
+  axes.y0 = 0 + .5*canvas.height // y0 pixels from top to y=0
+  axes.scale = 40                 // 40 pixels from x=0 to x=1
   axes.doNegativeX = true
 
-  showAxes(ctx,axes,1)
+  showAxes(ctx,axes)
   let c = 0
   functions.map(func => {
     funGraph(ctx, axes, func, colors[c++], 2)
@@ -67,29 +67,16 @@ const funGraph = (ctx,axes,func,color,thick) => {
   ctx.stroke()
 }
 
-const showAxes = (ctx,axes,steps) => {
+const showAxes = (ctx,axes) => {
   let x0=axes.x0, w=ctx.canvas.width
   let y0=axes.y0, h=ctx.canvas.height
   let xmin = axes.doNegativeX ? 0 : x0
   ctx.beginPath()
   ctx.strokeStyle = "grey"
-  ctx.font = '10px monospace bold'
-  ctx.moveTo(xmin,y0);ctx.lineTo(w,y0)   // X axis
-  ctx.moveTo(x0,0);ctx.lineTo(x0,h)  // Y axis
-  ctx.moveTo(xmin, y0) // start drawing the intervals:
-  for(let i = xmin; i <= x0*2; i += axes.scale*steps){
-    ctx.moveTo(i, y0+axes.scale/4) // goes down // math behind: interval line is so long as quarter of a step (unit: pixel)
-    ctx.lineTo(i, y0-axes.scale/4) // goes up
-    ctx.fillText(i/axes.scale - w/(2*axes.scale), i-axes.scale/4, y0+axes.scale) //
-  }
-  ctx.moveTo(x0, 0)
-  for(let i = 0; i <=y0*2; i += axes.scale*steps){
-    ctx.moveTo(x0+axes.scale/4, i) // goes left
-    ctx.lineTo(x0-axes.scale/4, i) // goes right
-    ctx.fillText(-i/axes.scale + w/(2*axes.scale), x0-axes.scale, i+axes.scale/4) //
-  }
-  ctx.moveTo(x0, y0)
-  ctx.fillText(y0, 1, 360)
+  ctx.moveTo(xmin,y0)
+  ctx.lineTo(w,y0)   // X axis
+  ctx.moveTo(x0,0)
+  ctx.lineTo(x0,h)  // Y axis
   ctx.stroke()
 }
 

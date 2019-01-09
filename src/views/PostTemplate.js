@@ -33,9 +33,9 @@ const PostTemplate = {
     m('div', {id: vnode.state.URL},
       m('a', {href: '', oncreate: m.route.link}, "go back!"),
       m('p', vnode.children),
-      m('p', 'Categories: ' + vnode.state.tags),
-      m('p', 'And my URL is ' + vnode.state.URL),
-      m('a', {href: vnode.state.URL, oncreate: m.route.link}, "click here to navigate me! "),
+      // m('p', 'Categories: ' + vnode.state.tags),
+      // m('p', 'And my URL is ' + vnode.state.URL),
+      // m('a', {href: vnode.state.URL, oncreate: m.route.link}, "click here to navigate me! "),
       m('hr')
     )
 }

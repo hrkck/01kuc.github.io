@@ -9,10 +9,10 @@
 
 const m = require('mithril');
 const Graph = require('../views/Graph')
-const drawFunction = require('./drawFunction')
+const drawFunction_old = require('./drawFunction_old')
 
 
-const graph = (...args) => m(Graph, {funcs: args, drawFunc: drawFunction})
+const oldGraph = (...args) => m(Graph, {funcs: args, drawFunc: drawFunction_old})
 
 
-module.exports = graph
+module.exports = oldGraph
