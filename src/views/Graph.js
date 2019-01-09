@@ -1,14 +1,25 @@
 // ./views/Graph.js
 // Draw a functional graph
+// Attachables (attributables):
+//  - a list of javascript mathematical function
+//  - a drawer function
+//  - a limit for the x and y axes
+//  - step size to draw intervals
+
 
 const m = require('mithril')
-const draw = require('../helpers/drawFunction')
+
+const style = {
+  border: '1px solid black'
+}
+
 
 const Graph = {
   view: (vnode) =>
     m('div',
-      m('canvas', {id:"", width:'300', height:'300', funcs: vnode.attrs.funcs, oncreate: draw})
+      m('canvas', {style: style, id:"", width:'360', height:'360', funcs: vnode.attrs.funcs, oncreate: vnode.attrs.drawFunc, limit: vnode.attrs.limit, step: vnode.attrs.step})
     )
 }
+
 
 module.exports = Graph

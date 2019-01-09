@@ -8,7 +8,6 @@ const code = require('./helpers/renderCode')
 let state = require('./models/state')
 const routes = require('./models/routes')
 
-const Graph = require('./views/Graph')
 const SearchBox = require('./views/SearchBox')
 const PostTemplate = require('./views/PostTemplate')
 const NextPage = require('./views/NextPage')
@@ -35,10 +34,11 @@ let t2 = 'c,a'
 let t3 = 'katex,math'
 let t4 = 'plot,draw'
 let t5 = 'code,javascript,highlight'
+
 let c1 = 'First Post'
 let c2 = markdown('# hello, markdown!')
 let c3 = m('p', 'math ', m('p', math('sum_(i=1)^n i^3=((n(n+1))/2)^2')))
-let c4 = m('div', graph('Math.sin(x)', 'Math.cos(x)', 'x', 'Math.pow(x,2)'))
+let c4 = m('div', graph(10, 2, 'x', '-x+10', '1/10*x**2', 'x**3', 'Math.sin(x)', 'Math.cos(x)', '-x', '-5', '-7'))
 let c5 = m('div', code('block', snippet), m('p', 'here is an inline code ', code('inline', `console.log('That is the way it is done!')`), ' snippet'))
 
 
@@ -61,7 +61,7 @@ let attrs = {
   [t2]: url2,
   [t3]: url3,
   [t4]: url4,
-  [t5]: url5
+  [t5]: url5,
 }
 
 
