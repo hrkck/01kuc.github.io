@@ -1,6 +1,7 @@
 // ./helpers/renderMath.js
 // Converts:
-// ASCII math expression => TeX math expressions => html => Hyperscript
+// ASCII math exp (as string) => TeX math exp (as string) => html (as string) => hyperscript (as string) => hyperscript
+
 
 const m = require('mithril')
 const katex = require('katex')
@@ -10,7 +11,7 @@ const AsciiMathParser = require('./asciimath2tex')
 const parser = new AsciiMathParser()
 
 
-const renderMath = (exp) => {
+const math = (exp) => {
   try {
     const f = Function('m', "return " + htmlToHyperscript({source: katex.renderToString(parser.parse(exp))}))
     return f(m)
@@ -23,7 +24,7 @@ const renderMath = (exp) => {
 }
 
 
-module.exports = renderMath
+module.exports = math
 
 // REFERENCES:
 // https://stackoverflow.com/questions/54058166/evaluate-a-function-call-given-as-a-string-which-was-declared-with-require
