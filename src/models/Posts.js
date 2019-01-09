@@ -16,7 +16,8 @@ const Posts = (contents, tags) => {
   for(var url in contents){
     currentPost = m(PostTemplate, {tags: tags[url], URL: url}, contents[url])
     list.push(currentPost)
-    routes.addVnodeRoute(tags[url], currentPost)
+    // routes.addVnodeRoute(url, currentPost)
+    console.log(routes.routes)
   }
   return list
 }
