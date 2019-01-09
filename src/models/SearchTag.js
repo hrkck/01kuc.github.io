@@ -12,14 +12,14 @@ const m = require('mithril')
 const PostTemplate = require('../views/PostTemplate')
 
 
-const SearchTag = (targetTag, base, attrs) => {
+const SearchTag = (targetTag, contents, tags) => {
   if(targetTag === '') return undefined
   let targetTags = targetTag.split(',') // split into a list
   let list = []
 
-  for(var originalTags in base){
-    if(targetTags.some(targetTag => originalTags.split(',').includes(targetTag))){
-      list.push(m(PostTemplate, {tags: originalTags, URL: attrs[originalTags]}, base[originalTags]))
+  for(var url in contents){
+    if(targetTags.some(targetTag => tags[url].split(',').includes(targetTag))){
+      list.push(m(PostTemplate, {tags: tags[url], URL: url}, contents[url]))
     }
   }
   return list

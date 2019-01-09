@@ -10,13 +10,13 @@ const m = require('mithril')
 const routes = require('./routes');
 const PostTemplate = require('../views/PostTemplate')
 
-const Posts = (base, attrs) => {
+const Posts = (contents, tags) => {
   let list = []
   let currentPost = undefined
-  for(var tags in base){
-    currentPost = m(PostTemplate, {tags: tags, URL: attrs[tags]}, base[tags])
+  for(var url in contents){
+    currentPost = m(PostTemplate, {tags: tags[url], URL: url}, contents[url])
     list.push(currentPost)
-    routes.addVnodeRoute(attrs[tags], currentPost)
+    routes.addVnodeRoute(tags[url], currentPost)
   }
   return list
 }
