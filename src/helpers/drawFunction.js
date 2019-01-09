@@ -38,10 +38,10 @@ const draw = (e) => {
   let ctx = canvas.getContext("2d")
   axes.x0 = .5*canvas.width  // x0 pixels from left to x=0
   axes.y0 = .5*canvas.height // y0 pixels from top to y=0
-  axes.scale = canvas.width/(2*10)// 18 pixels from x=0 to x=1 !! WOW MATH! or max '10' intervals! VERY IMPORTANT VAR
+  axes.scale = canvas.width/(2*e.attrs.limit)// 18 pixels from x=0 to x=1 !! WOW MATH! or max '10' intervals! VERY IMPORTANT VAR
   axes.doNegativeX = true
 
-  showAxes(ctx,axes,1)
+  showAxes(ctx,axes,e.attrs.step)
   let c = 0
   functions.map(func => {
     funGraph(ctx, axes, func, colors[c++], 2)

@@ -12,7 +12,7 @@ const Graph = require('../views/Graph')
 const drawFunction = require('./drawFunction')
 
 
-const graph = (...args) => m(Graph, {funcs: args, drawFunc: drawFunction})
+const graph = (limit, step, ...args) => m(Graph, {limit: limit, step: step, funcs: args, drawFunc: drawFunction, })
 
 
 module.exports = graph

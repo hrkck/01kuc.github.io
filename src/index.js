@@ -40,7 +40,7 @@ let t5 = 'code,javascript,highlight'
 let c1 = 'First Post'
 let c2 = markdown('# hello, markdown!')
 let c3 = m('p', 'math ', m('p', math('sum_(i=1)^n i^3=((n(n+1))/2)^2')))
-let c4 = m('div', graph('-x + 10', '', 'x', 'Math.pow(x,2) - 10'))
+let c4 = m('div', graph(10, 2, '-x + 10', '', 'x', 'Math.pow(x,2) - 10'))
 let c5 = m('div', code('block', snippet), m('p', 'here is an inline code ', code('inline', `console.log('That is the way it is done!')`), ' snippet'))
 let c6 = m('div', oldGraph('Math.sin(x)', 'Math.cos(x)', 'x', 'Math.pow(x,2)'))
 
