@@ -1,5 +1,11 @@
 // ./views/Graph.js
 // Draw a functional graph
+// Attachables (attributables):
+//  - a list of javascript mathematical function
+//  - a drawer function
+//  - a limit for the x and y axes
+//  - step size to draw intervals
+
 
 const m = require('mithril')
 

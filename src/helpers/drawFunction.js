@@ -18,12 +18,12 @@ const colors = [
   'red',
   'blue',
   'green',
-  'magenta',
-  'purple',
-  'yellow',
-  'darkred',
-  'darkmagenta',
-  'cyan'
+  'indianred',
+  'cornflowerblue',
+  'lawngreen',
+  'palevioletred',
+  'royalblue',
+  'darkgreen'
 ]
 
 const makeFunc = (math_exp) => Function('x', 'return ' + math_exp)
@@ -59,6 +59,9 @@ const funGraph = (ctx,axes,func,color,thick) => {
   ctx.lineWidth = thick
   ctx.strokeStyle = color
 
+  // very important for loop
+  // hold the very logic of drawing a functioN!
+  // STUDY IT!
   for (var i=iMin;i<=iMax;i++) {
     xx = dx*i; yy = scale*func(xx/scale)
     if (i==iMin) ctx.moveTo(x0+xx,y0-yy)
