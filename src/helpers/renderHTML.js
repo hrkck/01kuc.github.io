@@ -1,9 +1,13 @@
 // ./helpers/renderHTML.js
+// Converts:
+// HTML (as string) => hyperscript (as string) => hyperscript
+
 
 const m = require('mithril')
 const htmlToHyperscript = require('./htmlToHyperscript')
 
 
-const renderHTML = exp => Function('m', "return " + htmlToHyperscript({source: (exp)}))(m)
+const html = str => Function('m', "return " + htmlToHyperscript({source: (str)}))(m)
 
-module.exports = renderHTML;
+
+module.exports = html;
