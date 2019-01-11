@@ -1,3 +1,9 @@
+body{
+  background-image: url('lightnoise.png');
+  background-repeat: repeat;
+  background-color: rgb(225,225,225);
+}
+
 .microlight{
   padding: 5px;
   font-family : monospace;
