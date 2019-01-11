@@ -18,26 +18,30 @@
 // or blogging directly with VNodes must be accepted as a standard
 // For my own part, I currently have a friendly experience with VNodes
 
+
 const m = require('mithril')
 const microlight = require('../helpers/microlight')
+const markdown = require('../helpers/renderMarkdown')
 
-const PostTemplate = {
-  oninit: (vnode) => {
-    vnode.state.tags = vnode.attrs.tags
-    vnode.state.URL = vnode.attrs.URL
-  },
+
+const LayoutPost = {
   oncreate: () => {
     microlight.reset();
   },
   view: (vnode) =>
-    m('div', {id: vnode.state.URL},
-      m('a', {href: '', oncreate: m.route.link}, "go back!"),
-      m('p', vnode.children),
-      m('p', 'Categories: ' + vnode.state.tags),
-      m('p', 'And my URL is ' + vnode.state.URL),
-      m('a', {href: vnode.state.URL, oncreate: m.route.link}, "click here to navigate me! "),
-      m('hr')
+    m('div', {id: vnode.attrs.URL},
+      m(PostTitle, {title: vnode.attrs.title}),
+      m(PostProperties, {date: 'dateNotImplemented', tags: vnode.attrs.tags, URL: vnode.attrs.URL}),
+      m(PostContent, vnode.children),
+      m('hr'),
+      m('br')
     )
 }
 
-module.exports = PostTemplate
+
+const PostTitle = {view: vnode => markdown('# ' + vnode.attrs.title)}
+const PostProperties = {view: vnode => markdown(vnode.attrs.date + ', ' + vnode.attrs.tags + ', ' + vnode.attrs.URL)}
+const PostContent = {view: vnode => vnode.children}
+
+
+module.exports = LayoutPost

@@ -4,26 +4,31 @@
 // If any of the tags satisfy the case, the Post will be added to the list.
 
 
-// TODO:
+// TODO: DONE
 // Here, base and attrs parameters are temporary solutions.
-// They can be found in index.js
-
-const m = require('mithril')
-const PostTemplate = require('../views/PostTemplate')
+// They can be found in index.js // NO MORE RELEVANTs
 
 
-const SearchTag = (targetTag, contents, tags) => {
+const AllPosts = require('../content/AllPosts')
+const PostList = require('./PostList')
+
+
+const SearchTag = (targetTag) => {
   if(targetTag === '') return undefined
   let targetTags = targetTag.split(',') // split into a list
   let list = []
 
-  for(var url in contents){
-    if(targetTags.some(targetTag => tags[url].split(',').includes(targetTag))){
-      list.push(m(PostTemplate, {tags: tags[url], URL: url}, contents[url]))
+  for(let baseurl in AllPosts){
+    for(let url in AllPosts[baseurl]){
+      po = AllPosts[baseurl][url]
+      if(targetTags.some(targetTag => po.tags.split(',').includes(targetTag))){
+        list.push(PostList(url, po.title, po.tags, po.content))
+      }
     }
   }
   return list
 }
+
 
 module.exports = SearchTag;
 

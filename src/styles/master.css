@@ -4,7 +4,7 @@ body{
   background-color: rgb(225,225,225);
 }
 
-.microlight{
+pre, code{
   padding: 5px;
   font-family : monospace;
   color: #B5F7FF;
