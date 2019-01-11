@@ -9,10 +9,10 @@
 
 const m = require('mithril')
 
+
 const style = {
   border: '1px solid black'
 }
-
 
 const Graph = {
   view: (vnode) =>
