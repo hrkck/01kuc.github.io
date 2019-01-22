@@ -26,6 +26,10 @@ const math = require('../helpers/renderMath')
 const code = require('../helpers/renderCode')
 
 
+
+// let calcTime = 
+
+
 // Post(url, title, tags, content),
 // white space &nbsp;
 const AllPosts = {
@@ -169,11 +173,11 @@ here is an idea that struck to Niko on an evening of January... :
             src: './src/content/media/other/a-year-clock/tommy-niko-jasmin-hakki.jpeg', 
             alt: 'tommy-niko-jasmin-hakki',
             //https://stackoverflow.com/a/51817813/6025059
-            onload: (e)=>{
+            oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
               let inception = new Date('January 17, 2019 22:10:00');
               let now = new Date();
               let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
-              e.target.setAttribute("style", "transform: rotate(" + deg + "deg)"); 
+              vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
             }
           }),
           markdown(
@@ -185,11 +189,11 @@ This picture will rotate clock-wise by .986 degree a day. For instance, in 365 d
           markdown(`A simple \`new Date()\` output controls rotation of the image and that does the js trick.`),  
           code('block',
 `
-onload: (e)=>{
+oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
   let inception = new Date('January 17, 2019 22:10:00');
   let now = new Date();
   let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
-  e.target.setAttribute("style", "transform: rotate(" + deg + "deg)"); 
+  vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
 }
 `)
         )
