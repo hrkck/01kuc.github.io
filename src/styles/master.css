@@ -14,3 +14,10 @@ pre, code{
   background-image: url('bg.png');
   border-radius: 2px;
 }
+
+.a-year-clock{
+  width: 360px;
+  transition: all 0.3s ease;
+  border: 2px solid black;
+  /* border-radius: 3.75em; */
+}

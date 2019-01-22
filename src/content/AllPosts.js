@@ -26,6 +26,10 @@ const math = require('../helpers/renderMath')
 const code = require('../helpers/renderCode')
 
 
+
+// let calcTime = 
+
+
 // Post(url, title, tags, content),
 // white space &nbsp;
 const AllPosts = {
@@ -154,7 +158,54 @@ This post can be used as a note taking place to keep a memory on the good resour
       `
       )
     }
+  },
+  ['other']: {
+    ['a-year-clock']:{
+      title: '',
+      tags: 'tommy,niko,jasmin,hakki,year,clock',
+      content: m('div', 
+          markdown(
+`
+here is an idea that struck to Niko on an evening of January... :
+`
+          ),
+          m('img.a-year-clock', {
+            src: './src/content/media/other/a-year-clock/tommy-niko-jasmin-hakki.jpeg', 
+            alt: 'tommy-niko-jasmin-hakki',
+            //https://stackoverflow.com/a/51817813/6025059
+            oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
+              let inception = new Date('January 17, 2019 22:10:00');
+              let now = new Date();
+              let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
+              vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
+            }
+          }),
+          markdown(
+`
+This picture will rotate clock-wise by .986 degree a day. For instance, in 365 days, it will appear without any orientation. As the picture rotates, each person will tell a date. Therefore, since the picture is taken on 17 January, Tommy corresponds to Winter, I to Spring, Jasmin to Summer and Niko to Autumn.
+
+
+`         ),
+          markdown(`A simple \`new Date()\` output controls rotation of the image and that does the js trick.`),  
+          code('block',
+`
+oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
+  let inception = new Date('January 17, 2019 22:10:00');
+  let now = new Date();
+  let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
+  vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
+}
+`)
+        )
+    }
   }
+  // ['some-parent-url']: {
+  //   ['post-url']: {
+  //     title: '',
+  //     tags: '',
+  //     contents: ''
+  //   }
+  // }
 }
 
 module.exports = AllPosts
