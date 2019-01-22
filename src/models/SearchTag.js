@@ -21,7 +21,7 @@ const SearchTag = (targetTag) => {
   for(let baseurl in AllPosts){
     for(let url in AllPosts[baseurl]){
       po = AllPosts[baseurl][url]
-      if(targetTags.some(targetTag => po.tags.split(',').includes(targetTag))){
+      if(targetTags.some(a => po.tags.split(',').some(tag => tag.toLowerCase().includes(a.toLowerCase())))){
         list.push(PostList(url, po.title, po.tags, po.content))
       }
     }
