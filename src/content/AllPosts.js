@@ -170,7 +170,7 @@ here is an idea that struck to Niko on an evening of January... :
 `
           ),
           m('img.a-year-clock', {
-            src: './src/content/media/other/a-year-clock/tommy-niko-jasmin-hakki.jpeg', 
+            src: './src/content/media/other/a-year-clock/tommy-niko-jasmin-hakki.png', 
             alt: 'tommy-niko-jasmin-hakki',
             //https://stackoverflow.com/a/51817813/6025059
             oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
