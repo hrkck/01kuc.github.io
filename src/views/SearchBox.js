@@ -9,7 +9,7 @@ const state = require('../models/state')
 const SearchBox = {
   view: () =>
     m('p',
-      m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, onchange: state.searchTag}),
+      m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, oninput: state.searchTag}), // oninput: search instantly, onchange: search on hit `enter`
       m('p', 'You are searching this => ' + state.searchedTag))
 }
 
