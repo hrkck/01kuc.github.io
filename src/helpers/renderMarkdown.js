@@ -16,3 +16,4 @@ module.exports = markdown;
 
 // REFERENCES:
 // See ./helpers/renderMath.js for more information about `Function(...)(...)`
+// https://stackoverflow.com/questions/6507056/replace-all-whitespace-characters

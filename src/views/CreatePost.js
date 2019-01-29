@@ -1,5 +1,8 @@
-// ./views/NextPage.js
-// A demonstration of basic routing in Mithril JS
+// ./views/CreatePost.js
+// The page to create posts
+
+// references
+// https://stackoverflow.com/questions/45831191/generate-and-download-file-from-js
 
 const m = require('mithril')
 
@@ -17,7 +20,7 @@ const LayoutPostSolo = require('./LayoutPostSolo')
 const generatePosts = require('../helpers/generatePosts')
 
 
-// This is a closure!
+// This is a closure! //  https://how-to-mithril.js.org/#!/ -> simple closure comp
 const CreatePost = () => {
 
     let front_matter = '---\ntitle: \ntags: \nurl: \ndate: \n---\n'
