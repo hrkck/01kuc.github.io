@@ -8,8 +8,7 @@ const htmlToHyperscript = require('./htmlToHyperscript')
 const showdown = require('showdown')
 const converter = new showdown.Converter() // init converter
 
-
-const markdown = (str) => Function('m', "return " + htmlToHyperscript({source: converter.makeHtml(str)}))(m)
+const markdown = (str) => Function('m', "return " + htmlToHyperscript({source: converter.makeHtml(str.replace(/ /g, "&nbsp;"))}))(m)
 
 
 module.exports = markdown;
