@@ -8,7 +8,7 @@
 const m = require('mithril');
 
 
-const code = (isBlock, str) => {
+const code = (isBlock = 'block', str) => {
   if(isBlock === 'block' || (isBlock && isBlock !== 'inline')) return m('div', m('pre.microlight', m('code', str)))
   if(isBlock === 'inline' || (!isBlock && isBlock !== 'block')) return m('span', m('code.microlight', str))
 }
