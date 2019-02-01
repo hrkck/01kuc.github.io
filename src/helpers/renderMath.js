@@ -11,7 +11,7 @@ const AsciiMathParser = require('./asciimath2tex')
 const parser = new AsciiMathParser()
 
 
-const math = (isBlock, exp) => {
+const math = (isBlock = 'block', exp) => {
   let f = ''
   try {
     f = Function('m', "return " + htmlToHyperscript({source: katex.renderToString(parser.parse(exp)) }))
