@@ -22,6 +22,8 @@
 const m = require('mithril')
 const microlight = require('../helpers/microlight')
 const markdown = require('../helpers/renderMarkdown')
+const parseMarkdown = require('../helpers/parseMarkdown')
+const Link = require('./Link')
 
 
 const LayoutPost = {
@@ -29,19 +31,18 @@ const LayoutPost = {
     microlight.reset();
   },
   view: (vnode) =>
-    m('div', {id: vnode.attrs.URL},
+    m('div',
       m(PostTitle, {title: vnode.attrs.title}),
-      m(PostProperties, {date: 'dateNotImplemented', tags: vnode.attrs.tags, URL: vnode.attrs.URL}),
-      m(PostContent, vnode.children),
+      m(PostProperties, {date: vnode.attrs.date, tags: vnode.attrs.tags, URL: vnode.attrs.URL}),
+      m(PostContent, {content: vnode.attrs.content}),
       m('hr'),
-      m('br')
     )
 }
 
 
-const PostTitle = {view: vnode => markdown('# ' + vnode.attrs.title)}
-const PostProperties = {view: vnode => markdown(vnode.attrs.date + ', ' + vnode.attrs.tags + ', ' + vnode.attrs.URL)}
-const PostContent = {view: vnode => vnode.children}
+const PostTitle = {view: vnode => markdown('#' + vnode.attrs.title)}
+const PostProperties = {view: vnode => m('p', vnode.attrs.date + ', ' + vnode.attrs.tags + ', ' + vnode.attrs.URL)}
+const PostContent = {view: vnode => parseMarkdown(vnode.attrs.content)}
 
 
 module.exports = LayoutPost

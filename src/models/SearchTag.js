@@ -8,22 +8,28 @@
 // Here, base and attrs parameters are temporary solutions.
 // They can be found in index.js // NO MORE RELEVANTs
 
+const state = require('./state')
 
-const AllPosts = require('../content/AllPosts')
+const posts = require('../../content/all_posts')
 const PostList = require('./PostList')
+const PostListHeader = require('./PostListHeader')
 
 
-const SearchTag = (targetTag) => {
+const SearchTag = (targetTag, isDisplayHeader) => {
   if(targetTag === '') return undefined
+  if(isDisplayHeader === undefined) isDisplayHeader = false
+  else isDisplayHeader = state.searchDisplayType
+
   let targetTags = targetTag.split(',') // split into a list
   let list = []
+  let addPost = undefined
 
-  for(let baseurl in AllPosts){
-    for(let url in AllPosts[baseurl]){
-      po = AllPosts[baseurl][url]
-      if(targetTags.some(a => po.tags.split(',').some(tag => tag.toLowerCase().includes(a.toLowerCase())))){
-        list.push(PostList(url, po.title, po.tags, po.content))
-      }
+  for(let post of posts){
+    if(targetTags.some(a => post.tags.split(',').some(tag => tag.toLowerCase().includes(a.toLowerCase())))){
+
+      if(isDisplayHeader) addPost = PostListHeader(post.url, post.date, post.title, post.tags)
+      else addPost = PostList(post.url, post.date, post.title, post.tags, post.markdown)
+      list.push(addPost)
     }
   }
   return list

@@ -1,22 +1,22 @@
 const m = require('mithril')
 
-let state = require('./models/state')
 const routes = require('./models/routes')
 
-const SearchBox = require('./views/SearchBox')
+const SearchSection = require('./views/SearchSection')
 const FeaturesPage = require('./views/FeaturesPage')
 const CreatePost = require('./views/CreatePost')
 const SearchTag = require('./models/SearchTag')
 const Link = require('./views/Link')
 
+
 const Main = {
   view: () =>
-    m('div',
-      m('h1', 'Hello World! made with Mithril js'),
-      m(Link, {link: 'FeaturesPage'}, 'click here to navigate to the Features page.'),
-      m(Link, {link: 'CreatePost'}, 'click here to create a post -> '),
-      m(SearchBox),
-      SearchTag(state.searchedTag),
+    m('div.container',
+      m('h2', 'Hello World! made in Mithril js'),
+      m('p', 'Lest it becomes as strong as Mithril from Misty Mountains...'),
+      // m('p', m(Link, {link: 'FeaturesPage'}, 'click here to navigate to the Features page.')),
+      m('p', m(Link, {link: 'CreatePost'}, 'click here to create a post -> ')),
+      m(SearchSection),
     )
 }
 

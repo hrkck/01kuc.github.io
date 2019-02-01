@@ -6,7 +6,7 @@ const m = require('mithril')
 const LayoutPost = require('../views/LayoutPost')
 
 
-const Post = (url, title, tags, content) => m(LayoutPost, {URL: url, title: title, tags: tags, date: 'notImplemented'}, content)
+const Post = (url, date, title, tags, content) => m(LayoutPost, {URL: url, date: date, title: title, tags: tags, content: content})
 
 
 module.exports = Post
