@@ -18,18 +18,16 @@ const generatePosts = require('../helpers/generatePosts')
 
 const FeaturesPage = {
   view: () =>
-    m('div',
-      m(Link, {link: ''}, '<- go back'),
+    m('div.container.w-75',
+      m(Link, {link: ''}, '<- go to the main page'),
       markdown(`
-# This is the Features page
+#This is the Features page
 
-Here you will find a list of posts that demonstrates possible things in this website.
+Here you will find a list of posts that demonstrates possible types of content in this website.
       `),
-      generatePosts('FeaturesPage'),
+      SearchTag('features'),
       m('p', 'Seach any tag seperated by a comma, the post will appear below.'),
-      m(SearchBox),
-      SearchTag(state.searchedTag),
-      m(Link, {link: ''}, '<- go back'),
+      m(Link, {link: ''}, '<- go to the main page')
     )
 }
 

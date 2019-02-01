@@ -6,8 +6,8 @@ const Link = require('./Link')
 
 const LayoutPostSolo = {
   view: vnode =>
-    m('div',
-      m(Link, {link: vnode.attrs.baseURL}, '<- go back'),
+    m('div.container',
+      m(Link, {link: vnode.attrs.baseUrl}, '<- go back '),
       m('section', vnode.children)
   )
 }

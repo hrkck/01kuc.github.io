@@ -4,7 +4,7 @@
 
 
 const m = require('mithril')
-const AllPosts = require('../content/AllPosts')
+const posts = require('../../content/all_posts')
 const PostSolo = require('./PostSolo')
 
 
@@ -13,12 +13,10 @@ const routes = {
   addVnodeRoute: (key, value) => routes.routes[key] = {view: () => value},
   addVnodeRoutes: () => {
     let currentPost = undefined
-    for(let baseurl in AllPosts){
-      for(let url in AllPosts[baseurl]){
-        po = AllPosts[baseurl][url]
-        currentPost = PostSolo(baseurl, url, po.title, po.tags, po.content)
-        routes.addVnodeRoute(url, currentPost)
-      }
+    for(let post of posts){
+      currentPost = PostSolo(post.baseUrl, post.url, post.date, post.title, post.tags, post.markdown)
+      routes.addVnodeRoute(post.url, currentPost)
+      
     }
   },
   addComponentRoute: (key, value) => routes.routes[key] = value
