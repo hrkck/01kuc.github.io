@@ -17,8 +17,8 @@ const CreatePost = () => {
 
 	let isButtonDisabled = true
 
-	let front_matter = '---\ntitle: \ntags: \nurl: \nbaseUrl: \ndate: ' + now + '\n---\n'
-	let front_matter_parsed = {} // for files 
+	let front_matter = (parsed)=>'---\ntitle: ' + parsed['title'] +  '\ntags: ' + parsed['tags'] +  '\nurl: ' + parsed['url'] +  '\nbaseUrl: ' + parsed['baseUrl'] +  '\ndate: ' + now + '\n---\n'
+	let front_matter_parsed = {'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now} // for files 
 	let content = localStorage['postContent'] || "Please don't \`XSS\` me! But if you do, tell me how..."
 	let content_rendered = ''
 
@@ -42,14 +42,20 @@ const CreatePost = () => {
 	}
 
 	parseFrontMatter = function (e) {
-		front_matter = e.target.value
-		let top = (front_matter.replace('---\n', '').split('\n---\n'))[0] // clean from dashes
-		top.split('\n').forEach(line => {
-			var [key, value] = line.split(/: /) // seperate by `: `
-			front_matter_parsed[key] = value
-		})
+		const matter = e.target.name
+		front_matter_parsed[matter] = e.target.value
+		console.log(e.target.name)
+		// front_matter = e.target.value
+		// let top = (front_matter.replace('---\n', '').split('\n---\n'))[0] // clean from dashes
+		// top.split('\n').forEach(line => {
+		// 	var [key, value] = line.split(/: /) // seperate by `: `
+		// 	front_matter_parsed[key] = value
+		// })
 
 		console.log(front_matter_parsed)
+		console.log(front_matter(front_matter_parsed))
+		if(front_matter_parsed['title'] !== '') isButtonDisabled = false
+		else isButtonDisabled = true
 	}
 	parseContent = function (e) {
 		content = e.target.value
@@ -76,7 +82,7 @@ const CreatePost = () => {
 	downloadFile = function () {
 		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'] + ".md"
 		console.log(filename)
-		let text = front_matter + content
+		let text = front_matter(front_matter_parsed) + content
 
 		download(filename, text)
 	}
@@ -86,32 +92,26 @@ const CreatePost = () => {
 		view: () =>
 			m(LayoutPostSolo, {baseUrl: ''},
 				m('div.container[style=""]',
-					m('form', { autocomplete: 'on' },
-						m('div.row',
-							m('textarea.col-6[name=front-matter][rows=7]', { oninput: (e) => { parseFrontMatter(e); isButtonDisabled = false }, value: front_matter }),
-							m('div.col-6')
+					m('form',
+						m('div',
+							m('div', m('hr'), m('h3', 'Front Matter'), m('p', '---')),
+							m('div', 'title: ', m('input[type="text"][name="title"]', { oninput: parseFrontMatter})),
+							m('div', 'tags: ', m('input[type="text"][name="tags"]', { oninput: parseFrontMatter})),
+							m('div', 'url: ', m('input[type="text"][name="url"]', { oninput: parseFrontMatter})),
+							m('div', 'baseUrl: ', m('input[type="text"][name="baseUrl"]', { oninput: parseFrontMatter})),
+							m('div', 'date: ', m('input[type="text"][name="date"]', { oninput: parseFrontMatter, value: now})),
+							m('div', m('p', '---'), m('hr'), m('br')),
 						),
-						m('br'),
-						m('div.row',
+						m('h3','Content'),
+						m('p','It is updated on input or on mouse over ;)'),
+						m('div.container.row',
 							specFuncNames.map(name=>m('input[type="button"]', {value: 'render '+name, onclick: addSpecFun},)),
-							m('hr'),
-							m('br'),
-							// m('input[type="button"]', {value: 'render code', onclick: addSpecFun},),
-							// m('input[type="button"]', {value: 'render graph', onclick: addSpecFun},),
-							// m('input[type="button"]', {value: 'render html', onclick: addSpecFun},),
-							// m('input[type="button"]', {value: 'render hyperscript', onclick: addSpecFun},),
-							// m('input[type="button"]', {value: 'render markdown', onclick: addSpecFun},),
-							// m('input[type="button"]', {value: 'render math', onclick: addSpecFun},),
 						),
-						m('br'),
-						m('p','It is updated on input and on mouse over ;)'),
-						m('div.row',
+						m('input[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, ''),
+						m('div.container.row',
 							m('textarea.col-6[name="post-content"][style="min-height:70vh;"]', { oninput: parseContent, onmouseover: parseContent, value: content}),
-							m('div.col-6.word-wrap',
-								content_rendered
-							)
-						),
-						m('input[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, '')
+							m('div.col-6.word-wrap', content_rendered)
+						)
 					)
 				)
 			)
