@@ -7,24 +7,19 @@ const WRITEFILE = 'content/all_posts.js'
 let current = require(READFILE)
 
 function readDir(dir){
-  let md_files = []
-  fs.readdirSync(dir).forEach(file=>{
-    md_files.push(String(dir + '/' + file))
-  })
-  console.log("md files: ", md_files)
-  return md_files
+  return fs.readdirSync(dir).map(file=>String(dir + '/' + file))
 }
 function readFile(file){
-  let isFileRead = false
+  let fileNotRead = true
   let md_file = ''
-  while(!isFileRead){ // I don't know why, `on change` the file is not always read the first time...
+  while(fileNotRead){ // I don't know why, `on change` the file is not always read the first time...
     md_file = fs.readFileSync(file, 'utf8')
     if(md_file == ''){
       console.log(" ----------FILE NOT READ----------- ")
       continue
     }else{
       console.log(' +++++++FILE READ+++++++++ ')
-      isFileRead = true
+      fileNotRead = false
     }
   }
   return md_file
@@ -40,11 +35,7 @@ function parsePost(md_file){
   return post
 }
 function writePosts(posts){
-  console.log('current:', current)
-  let updated = uniqePosts(current.concat(posts))
-  current = updated
-  console.log('updated:', updated)
-  fs.writeFileSync(WRITEFILE, "module.exports = " + JSON.stringify(updated))
+  fs.writeFileSync(WRITEFILE, "module.exports = " + JSON.stringify(uniqePosts(current.concat(posts))))
 }
 function uniqePosts(array) {
   // https://stackoverflow.com/a/1584377/6025059
@@ -53,7 +44,6 @@ function uniqePosts(array) {
       for(var j=i+1; j<a.length; ++j) {
         // when an update comes, i represent the old version, j the new.
         // when this is detected, remove i, so only j is left, the new version...
-        console.log('INSIDE ARRAYUNIQUE: ', a[i])
         if(a[i] == undefined){
           break
         }
