@@ -8,17 +8,7 @@ const posts = require('../../content/all_posts.js')
 const PostList = require('../models/PostList')
 
 
-const generatePosts = () => {
-  let list = []
-  let currentPost = undefined
-
-  for(let post of posts){
-    console.log(post)
-    currentPost = PostList(post.url, post.date, post.title, post.tags, post.markdown)
-    list.push(currentPost)
-  }
-  return list
-}
+const generatePosts = () => posts.map(post=>PostList(post.url, post.date, post.title, post.tags, post.markdown))
 
 
 module.exports = generatePosts;
