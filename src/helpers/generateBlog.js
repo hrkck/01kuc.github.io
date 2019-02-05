@@ -6,9 +6,8 @@ const WRITEFILE = 'content/all_posts.js'
 
 let current = require(READFILE)
 
-function readDir(dir){
-  return fs.readdirSync(dir).map(file=>String(dir + '/' + file))
-}
+readDir = (dir) => fs.readdirSync(dir).map(file=>String(dir + '/' + file))
+
 function readFile(file){
   let fileNotRead = true
   let md_file = ''
@@ -34,9 +33,10 @@ function parsePost(md_file){
   console.log("generated post: " + JSON.stringify(post))
   return post
 }
-function writePosts(posts){
-  fs.writeFileSync(WRITEFILE, "module.exports = " + JSON.stringify(uniqePosts(current.concat(posts))))
-}
+
+writePosts = (posts) => fs.writeFileSync(WRITEFILE, "module.exports = " + JSON.stringify(uniqePosts(current.concat(posts))))
+
+
 function uniqePosts(array) {
   // https://stackoverflow.com/a/1584377/6025059
   var a = array.concat();
@@ -57,20 +57,11 @@ function uniqePosts(array) {
 let posts = readDir(PATH).map(readFile).map(parsePost)
 writePosts(posts)
 
-let counter = 0
+
 if (process.argv.includes('--watch')){
     const chokidar = require('chokidar');
     let watcher = chokidar.watch(PATH)
 
-    watcher.on('change', path => {
-      console.log(counter++, ` File ${path} has been changed.`)
-      let updatedPost = parsePost(readFile(path))
-      writePosts([updatedPost])
-    })
-
-    watcher.on('add', path => {
-      console.log(counter++, ` File ${path} has been added.`)
-      let newPost = parsePost(readFile(path))
-      writePosts([newPost])
-    })
+    watcher.on('change', path => {writePosts([parsePost(readFile(path))])})
+    watcher.on('add', path => {writePosts([parsePost(readFile(path))])})
 }
