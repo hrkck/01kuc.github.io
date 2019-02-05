@@ -23,21 +23,23 @@ const CreatePost = () => {
 	let content_rendered = ''
 
 
-	let specFuncNames = ['code','graph','math','html','hyperscript','markdown',]
+	let specFuncNames = ['code','graph','math','html','hyperscript','markdown','image','link']
 	addSpecFun = function(e) {
 		const specFun = e.target.value.split(' ')[1]
 		console.log(specFun)
 
-		content += '\<<< '
+		let head = '\n<<< '
+		let tail = ' >>>\n\n'
 
-		if(specFun === 'code') content += specFun+'(`block`, `code_highlight`)'
-		else if(specFun === 'graph') content += specFun+'(10, 2, `x`)'
-		else if(specFun === 'math') content += specFun+'(`block`, `f(x) = y`)'
-		else if(specFun === 'html') content += specFun+'(`<p>html</p>`)'
-		else if(specFun === 'hyperscript') content += specFun+'(`m(\'p\',\'hyperscript\')`)'
-		else if(specFun === 'markdown') content += specFun+'(`####markdown`)'
+		if(specFun === 'code') content += head + specFun+'(`block`, `code_highlight`)' + tail
+		else if(specFun === 'graph') content += head + specFun+'(10, 2, `x`)' + tail
+		else if(specFun === 'math') content += head + specFun+'(`block`, `f(x) = y`)' + tail
+		else if(specFun === 'html') content += head + specFun+'(`<p>html</p>`)' + tail
+		else if(specFun === 'hyperscript') content += head + specFun+'(`m(\'p\',\'hyperscript\')`)' + tail
+		else if(specFun === 'markdown') content += head + specFun+'(`####markdown`)' + tail
+		else if(specFun === 'image') content += '\n ![alt](url) \n'
+		else if(specFun === 'link') content += '\n [content](url) \n'
 		
-		content += ' >>>\n\\n'
 
 	}
 
@@ -107,11 +109,13 @@ const CreatePost = () => {
 						m('div.container.row',
 							specFuncNames.map(name=>m('input[type="button"]', {value: 'render '+name, onclick: addSpecFun},)),
 						),
-						m('input[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, ''),
+						m('input.btn.btn-success[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, ''),
 						m('div.container.row',
 							m('textarea.col-6[name="post-content"][style="min-height:70vh;"]', { oninput: parseContent, onmouseover: parseContent, value: content}),
 							m('div.col-6.word-wrap', content_rendered)
-						)
+						),
+						m('input.btn.btn-danger[type=button][value="delete content"]', { onclick: ()=>{content=''}}, ''),
+						m('p.small.text-danger', '(ctrl+z is not gonna bring it back!)')
 					)
 				)
 			)
