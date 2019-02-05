@@ -28,7 +28,7 @@ const CreatePost = () => {
 		const specFun = e.target.value.split(' ')[1]
 		console.log(specFun)
 
-		content += '\nescape '
+		content += '\<<< '
 
 		if(specFun === 'code') content += specFun+'(`block`, `code_highlight`)'
 		else if(specFun === 'graph') content += specFun+'(10, 2, `x`)'
@@ -37,7 +37,7 @@ const CreatePost = () => {
 		else if(specFun === 'hyperscript') content += specFun+'(`m(\'p\',\'hyperscript\')`)'
 		else if(specFun === 'markdown') content += specFun+'(`####markdown`)'
 		
-		content += ' end\n\\n'
+		content += ' >>>\n\\n'
 
 	}
 

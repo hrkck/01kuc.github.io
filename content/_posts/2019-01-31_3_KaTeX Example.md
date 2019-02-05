@@ -11,12 +11,12 @@ But I intend to solve this problem by interfering with the converter functions o
 
 a block math expression,
 
-escape math(`block`, `i = oo`) end
+<<< math(`block`, `i = oo`) >>>
 \n
 
 another...
 
-escape math(`block`, `sum_(i=1)^(n)i^3 = ((n(n+1))/2)^2`) end
+<<< math(`block`, `sum_(i=1)^(n)i^3 = ((n(n+1))/2)^2`) >>>
 \n
 
 and markdown continues here.
