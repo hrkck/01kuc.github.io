@@ -8,21 +8,8 @@ let current = require(READFILE)
 
 readDir = (dir) => fs.readdirSync(dir).map(file=>String(dir + '/' + file))
 
-function readFile(file){
-  let fileNotRead = true
-  let md_file = ''
-  while(fileNotRead){ // I don't know why, `on change` the file is not always read the first time...
-    md_file = fs.readFileSync(file, 'utf8')
-    if(md_file == ''){
-      console.log(" ----------FILE NOT READ----------- ")
-      continue
-    }else{
-      console.log(' +++++++FILE READ+++++++++ ')
-      fileNotRead = false
-    }
-  }
-  return md_file
-}
+readFile = (file) => fs.readFileSync(file, 'utf8')
+
 function parsePost(md_file){
   let [front_matter, body] = md_file.replace('---\n', '').split('\n---\n')
   let post = {markdown: body}
