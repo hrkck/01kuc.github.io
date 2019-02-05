@@ -38,7 +38,7 @@ const CreatePost = () => {
 		else if(specFun === 'hyperscript') content += head + specFun+'(`m(\'p\',\'hyperscript\')`)' + tail
 		else if(specFun === 'markdown') content += head + specFun+'(`####markdown`)' + tail
 		else if(specFun === 'image') content += '\n ![alt](url) \n'
-		else if(specFun === 'link') content += '\n ![content](url) \n'
+		else if(specFun === 'link') content += '\n [content](url) \n'
 		
 
 	}
