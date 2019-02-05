@@ -7,7 +7,7 @@ date: 2019-01-31
 ---
 To highlight code, I use [microlight](http://asvd.github.io/microlight/), Galaxy's simplest code highlighter.
 
-escape code(`block`, `function readFile(file){
+<<< code(`block`, `function readFile(file){
   let isFileRead = false
   let md_file = ''
   while(!isFileRead){ // I don't know why, \`on change\` the file is not always read the first time...
@@ -22,7 +22,7 @@ escape code(`block`, `function readFile(file){
   }
   return md_file
 }
-`) end
+`) >>>
 
 Just like rendering mathematical expressions, rendering inline code does not work. I believe they can be fixed the same way.
 

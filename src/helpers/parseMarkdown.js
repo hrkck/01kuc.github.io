@@ -19,7 +19,7 @@ let destringify = (funStr) => {
 let parseMarkdown = function (content) {
   let content_parsed = [] // list of markdown and special function pieces as string
   let content_rendered = [] // mithril vnode.children list with markdown and special functions
-  content_parsed = content.split(/escape ([\s\S]*?) end/gm)
+  content_parsed = content.split(/<<< ([\s\S]*?) >>>/gm)
   for (let i = 0; i < content_parsed.length; i++) {
     if(i % 2 === 0) content_rendered.push(markdown(content_parsed[i])) // if markdown
     if(i % 2 === 1) content_rendered.push(destringify(content_parsed[i])) // if specFun
