@@ -19,7 +19,9 @@ let state = {
     let all_tags = posts.map(post => post.tags).join(',').split(',').filter((v, i, a) => a.indexOf(v) === i)
     state.listedTags = []
     for(let tag of all_tags){
-      if(tag.toLowerCase().includes(state.searchedTag.toLowerCase())) state.listedTags.push(tag)
+      if(state.searchedTag.split(',').some(targetTag => tag.toLowerCase().includes(targetTag.toLowerCase()))){
+        state.listedTags.push(tag)
+      }
     }
   }
 }
