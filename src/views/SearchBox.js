@@ -10,8 +10,7 @@ const SearchBox = () => {
   return {
     view: () =>
       m('div',
-        m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, oninput: state.searchTag}), // oninput: search instantly, onchange: search on hit `enter`
-        // m('p', 'You are searching this => ' + state.searchedTag)
+        m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, oninput: state.searchTag})
       )
   }
 }

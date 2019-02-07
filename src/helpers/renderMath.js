@@ -8,7 +8,7 @@ const katex = require('katex')
 const htmlToHyperscript = require('./htmlToHyperscript')
 const AsciiMathParser = require('./asciimath2tex')
 
-const parser = new AsciiMathParser()
+let parser = new AsciiMathParser()
 
 
 const math = (isBlock = 'block', exp) => {
