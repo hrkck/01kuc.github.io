@@ -12,13 +12,11 @@ const LayoutPostSolo = require('./LayoutPostSolo')
 
 // This is a closure! //  https://how-to-mithril.js.org/#!/ -> simple closure comp
 const CreatePost = () => {
-
 	let now = new Date().toJSON().substring(0, 10)
-
 	let isButtonDisabled = true
 
-	let front_matter = (parsed)=>'---\ntitle: ' + parsed['title'] +  '\ntags: ' + parsed['tags'] +  '\nurl: ' + parsed['url'] +  '\nbaseUrl: ' + parsed['baseUrl'] +  '\ndate: ' + now + '\n---\n'
-	let front_matter_parsed = {'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now} // for files 
+	let front_matter = (parsed) => '---\ntitle: ' + parsed['title'] +  '\ntags: ' + parsed['tags'] +  '\nurl: ' + parsed['url'] +  '\nbaseUrl: ' + parsed['baseUrl'] +  '\ndate: ' + now + '\n---\n' // for files 
+	let front_matter_parsed = {'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now}
 	let content = localStorage['postContent'] || "Please don't \`XSS\` me! But if you do, tell me how..."
 	let content_rendered = ''
 
@@ -46,46 +44,29 @@ const CreatePost = () => {
 	parseFrontMatter = function (e) {
 		const matter = e.target.name
 		front_matter_parsed[matter] = e.target.value
-		console.log(e.target.name)
-		// front_matter = e.target.value
-		// let top = (front_matter.replace('---\n', '').split('\n---\n'))[0] // clean from dashes
-		// top.split('\n').forEach(line => {
-		// 	var [key, value] = line.split(/: /) // seperate by `: `
-		// 	front_matter_parsed[key] = value
-		// })
-
-		console.log(front_matter_parsed)
-		console.log(front_matter(front_matter_parsed))
 		if(front_matter_parsed['title'] !== '') isButtonDisabled = false
 		else isButtonDisabled = true
 	}
 	parseContent = function (e) {
 		content = e.target.value
 		localStorage['postContent'] = content
-
 		content_rendered = parseMarkdown(content)
 	}
 
 
 	// https://stackoverflow.com/a/45831280/6025059
 	download = function (filename, text) {
-		var element = document.createElement('a');
-		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-		element.setAttribute('download', filename);
-
-		element.style.display = 'none';
-		document.body.appendChild(element);
-
-		element.click();
-
-		document.body.removeChild(element);
+		var element = document.createElement('a')
+		element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text))
+		element.setAttribute('download', filename)
+		element.style.display = 'none'
+		document.body.appendChild(element)
+		element.click()
+		document.body.removeChild(element)
 	}
-
 	downloadFile = function () {
 		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'] + ".md"
-		console.log(filename)
 		let text = front_matter(front_matter_parsed) + content
-
 		download(filename, text)
 	}
 
@@ -121,7 +102,6 @@ const CreatePost = () => {
 			)
 	}
 }
-
 
 
 module.exports = CreatePost;

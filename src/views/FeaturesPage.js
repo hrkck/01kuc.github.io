@@ -2,18 +2,9 @@
 // A demonstration of basic routing in Mithril JS
 
 const m = require('mithril')
-
-const graph = require('../helpers/renderGraph')
 const markdown = require('../helpers/renderMarkdown')
-const math = require('../helpers/renderMath')
-const code = require('../helpers/renderCode')
-
-let state = require('../models/state')
-
-const SearchBox = require('./SearchBox')
 const SearchTag = require('../models/SearchTag')
 const Link = require("./Link")
-const generatePosts = require('../helpers/generatePosts')
 
 
 const FeaturesPage = {

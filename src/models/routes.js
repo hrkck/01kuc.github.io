@@ -3,7 +3,6 @@
 // A Vnode must be converted to a Component
 
 
-const m = require('mithril')
 const posts = require('../../content/all_posts')
 const PostSolo = require('./PostSolo')
 
@@ -15,12 +14,12 @@ const routes = {
     let currentPost = undefined
     for(let post of posts){
       currentPost = PostSolo(post.title, post.tags, post.url, post.baseUrl, post.date, post.markdown)
-      routes.addVnodeRoute(post.url, currentPost)
-      
+      routes.addVnodeRoute(post.url, currentPost)      
     }
   },
   addComponentRoute: (key, value) => routes.routes[key] = value
 }
+
 
 module.exports = routes;
 

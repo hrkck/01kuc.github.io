@@ -7,13 +7,12 @@ const state = require('../models/state')
 
 
 const SearchDisplayType = () => {
-
-  let isDisplay = 'header_post'
+  let isDisplay = localStorage['isDisplay'] || 'header_post'
 
   changeDisplay = (e) => {
     isDisplay = e.target.value
+    localStorage['isDisplay'] = isDisplay
     const boolVal = isDisplay === 'header_post'? true:false
-    console.log(boolVal)
     state.searchDisplayTypeReducer(boolVal)
   }
 
@@ -33,5 +32,6 @@ const SearchDisplayType = () => {
       ),
   }
 }
+
 
 module.exports = SearchDisplayType

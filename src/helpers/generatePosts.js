@@ -5,10 +5,10 @@
 // It will usually be needed to generate posts for a page, or to generate all posts in a blog-manner
 
 const posts = require('../../content/all_posts.js')
-const PostList = require('../models/PostList')
+const PostListFull = require('../models/PostListFull')
 
 
-const generatePosts = () => posts.map(post=>PostList(post.title, post.tags, post.url, post.date, post.markdown))
+const generatePosts = () => posts.map(post=>PostListFull(post.title, post.tags, post.url, post.date, post.markdown))
 
 
 module.exports = generatePosts;
