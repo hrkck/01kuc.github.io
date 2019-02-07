@@ -7,9 +7,9 @@ const LayoutPostSolo = require('../views/LayoutPostSolo')
 const Post = require('./Post')
 
 
-const PostSolo = (baseurl, url, date, title, tags, content) =>
+const PostSolo = (title, tags, url, baseurl, date, content) =>
   m(LayoutPostSolo, {baseUrl: baseurl},
-    Post(url, date, title, tags, content)
+    Post(title, tags, url, date, content)
   )
 
 

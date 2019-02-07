@@ -14,7 +14,7 @@ const routes = {
   addVnodeRoutes: () => {
     let currentPost = undefined
     for(let post of posts){
-      currentPost = PostSolo(post.baseUrl, post.url, post.date, post.title, post.tags, post.markdown)
+      currentPost = PostSolo(post.title, post.tags, post.url, post.baseUrl, post.date, post.markdown)
       routes.addVnodeRoute(post.url, currentPost)
       
     }
