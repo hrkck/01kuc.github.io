@@ -8,11 +8,12 @@ const state = require('../models/state')
 
 const SearchDisplayType = () => {
   let isDisplay = localStorage['isDisplay'] || 'header_post'
-
+  let boolVal = false
+  
   changeDisplay = (e) => {
     isDisplay = e.target.value
     localStorage['isDisplay'] = isDisplay
-    const boolVal = isDisplay === 'header_post'? true:false
+    boolVal = isDisplay == 'header_post'? true:false
     state.searchDisplayTypeReducer(boolVal)
   }
 

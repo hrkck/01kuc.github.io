@@ -16,8 +16,8 @@ const PostListHeader = require('./PostListHeader')
 
 const SearchTag = (targetTag, isDisplayHeader) => {
   if(targetTag === '') return undefined
-  if(isDisplayHeader === undefined) isDisplayHeader = false
-  else isDisplayHeader = state.searchDisplayType
+  // if(isDisplayHeader === undefined) isDisplayHeader = false
+  isDisplayHeader = state.searchDisplayType
 
   let targetTags = targetTag.split(',') // split into a list
   let list = []
