@@ -27,8 +27,8 @@ const SearchTag = (targetTag, isDisplayHeader) => {
   for(let post of posts){
     if(targetTags.some(a => post.tags.split(',').some(tag => tag.toLowerCase().includes(a.toLowerCase())))){
 
-      if(isDisplayHeader) addPost = PostListHeader(post.url, post.date, post.title, post.tags)
-      else addPost = PostList(post.url, post.date, post.title, post.tags, post.markdown)
+      if(isDisplayHeader) addPost = PostListHeader(post.title, post.tags, post.url, post.date)
+      else addPost = PostList(post.title, post.tags, post.url, post.date, post.markdown)
       list.push(addPost)
     }
   }

@@ -1,6 +1,5 @@
 const m = require('mithril')
 
-const LayoutPost = require('./LayoutPost')
 const Link = require('./Link')
 
 

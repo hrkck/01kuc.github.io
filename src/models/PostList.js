@@ -7,10 +7,8 @@ const LayoutPostList = require('../views/LayoutPostList')
 const Post = require('./Post')
 
 
-const PostList = (url, date, title, tags, content) =>
-  m(LayoutPostList, {URL: url},
-    Post(url, date, title, tags, content)
-  )
+const PostList = (title, tags, url, date, content) =>
+  m(LayoutPostList, {title: title, URL: url}, Post(' ', tags, url, date, content))
 
 
 module.exports = PostList
