@@ -7,8 +7,8 @@ const LayoutPostList = require('../views/LayoutPostList')
 const Post = require('./Post')
 
 
-const PostList = (title, tags, url, date, content) =>
+const PostListFull = (title, tags, url, date, content) =>
   m(LayoutPostList, {title: title, URL: url}, Post(' ', tags, url, date, content))
 
 
-module.exports = PostList
+module.exports = PostListFull

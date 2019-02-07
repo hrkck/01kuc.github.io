@@ -11,7 +11,7 @@
 const state = require('./state')
 
 const posts = require('../../content/all_posts')
-const PostList = require('./PostList')
+const PostListFull = require('./PostListFull')
 const PostListHeader = require('./PostListHeader')
 
 
@@ -28,7 +28,7 @@ const SearchTag = (targetTag, isDisplayHeader) => {
     if(targetTags.some(a => post.tags.split(',').some(tag => tag.toLowerCase().includes(a.toLowerCase())))){
 
       if(isDisplayHeader) addPost = PostListHeader(post.title, post.tags, post.url, post.date)
-      else addPost = PostList(post.title, post.tags, post.url, post.date, post.markdown)
+      else addPost = PostListFull(post.title, post.tags, post.url, post.date, post.markdown)
       list.push(addPost)
     }
   }
