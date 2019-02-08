@@ -36,6 +36,22 @@ const draw = (e) => {
 
   let axes = {}
   let ctx = canvas.getContext("2d")
+
+  // https://stackoverflow.com/a/50233691/6025059
+  ctx.canvas.width = ctx.canvas.width; // THIS LINE ALLOWS THE GRAPH TO REDRAW.
+  // ctx.clearRect(0, 0, canvas.width, canvas.height) // THIS LINE ALSO ALLOWS THE GRAPH TO REDRAW. (but no completely.)
+  // THE PROBLEM WAS NOT WITH graph FUNCTION
+  // THE PROBLEM WAS NOT STRINGIFYING THE MARKDOWN INPUT
+  // THE PROBLEM WAS NOT WITH MITHRIL CLEARING THE DRAWING with onbeforeupdate 
+  // THE PROBLEM WAS WITH THE CLEARING THE CANVAS WITH A SIMPLE ERASER FUNCTION.
+  // SIMPLE
+  // IS
+  // THAT.
+  // Hold on a minute.
+  // It was actually <also> about mithrils lifecycles methods,
+  // I should have used onupdate instead of oncreate...
+  // AND ACTUALLY
+  // I should also have oncreate method for initial drawing
   axes.x0 = .5*canvas.width  // x0 pixels from left to x=0
   axes.y0 = .5*canvas.height // y0 pixels from top to y=0
   axes.scale = canvas.width/(2*e.attrs.limit)// 18 pixels from x=0 to x=1 !! WOW MATH! or max '10' intervals! VERY IMPORTANT VAR
@@ -52,7 +68,7 @@ const draw = (e) => {
 }
 
 const funGraph = (ctx,axes,func,color,thick) => {
-  let xx, yy, dx=4, x0=axes.x0, y0=axes.y0, scale=axes.scale
+  let xx, yy, dx=0.01, x0=axes.x0, y0=axes.y0, scale=axes.scale
   let iMax = Math.round((ctx.canvas.width-x0)/dx)
   let iMin = axes.doNegativeX ? Math.round(-x0/dx) : 0
   ctx.beginPath()
