@@ -7,7 +7,7 @@ date: 2019-01-31
 ---
 To highlight code, I use [microlight](http://asvd.github.io/microlight/), Galaxy's simplest code highlighter.
 
-<<< code(`block`, `function readFile(file){
+<<< code(`function readFile(file){
   let isFileRead = false
   let md_file = ''
   while(!isFileRead){ // I don't know why, \`on change\` the file is not always read the first time...
@@ -24,7 +24,7 @@ To highlight code, I use [microlight](http://asvd.github.io/microlight/), Galaxy
 }
 `) >>>
 
-Just like rendering mathematical expressions, rendering inline code does not work. I believe they can be fixed the same way.
+Rendering an inline code is also quite straight forward, `(e)=>{console.log(e.target.value)}` will do it...
 
 The end. Puummm.
 

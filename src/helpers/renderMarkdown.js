@@ -10,7 +10,11 @@ const converter = new showdown.Converter() // init converter
 
 
 // EXPLAIN WHAT ARE THE `REPLACE` FUNCTIONS!
-const markdown = (str) => Function('m', "return " + htmlToHyperscript({ source: converter.makeHtml(str.replace(/([^-*])( )/g, "$1&nbsp;")) }).replace(/&nbsp;/g, ' '))(m)
+const markdown = (str) => Function('m', "return " + htmlToHyperscript({ source: converter.makeHtml(str
+    .replace(/([^-*])( )/g, "$1&nbsp;")) })
+    .replace(/&amp;/g, ' ')
+    .replace(/&nbsp;|nbsp;/g, ' ')
+    )(m)
 
 
 module.exports = markdown;

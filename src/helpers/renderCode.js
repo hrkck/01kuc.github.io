@@ -6,12 +6,15 @@
 
 
 const m = require('mithril');
+const microlight = require('../helpers/microlight')
 
 
-const code = (isBlock = 'block', str) => {
-  if(isBlock === 'block' || (isBlock && isBlock !== 'inline')) return m('div', m('pre.microlight', m('code', str)))
-  if(isBlock === 'inline' || (!isBlock && isBlock !== 'block')) return m('span', m('code.microlight', str))
-}
+const code = (str) => m('div', 
+  { 
+    oncreate: () => {microlight.reset()}
+  }, 
+  m('pre.microlight', m('code', str))
+)
 
 
 module.exports = code

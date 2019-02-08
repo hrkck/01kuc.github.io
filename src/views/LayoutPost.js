@@ -20,15 +20,11 @@
 
 
 const m = require('mithril')
-const microlight = require('../helpers/microlight')
 const markdown = require('../helpers/renderMarkdown')
 const parseMarkdown = require('../helpers/parseMarkdown')
 
 
 const LayoutPost = {
-  oncreate: () => {
-    microlight.reset();
-  },
   view: (vnode) =>
     m('div',
       m(PostTitle, {title: vnode.attrs.title}),
