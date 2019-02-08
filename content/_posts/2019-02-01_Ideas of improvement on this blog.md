@@ -21,6 +21,10 @@ Implemented ideas are written with a gray color.
 
 <li> List of tags should dissappear when user enter an input, thus limiting the possible options of tags.</li>
 
+<li> inline rendering for code snippets and math expression are not working. Fix them.  </li>
+
+<li> HTML white space entity is persisting when there is a white space between grave marks... </li>
+
 
 </ul>`) >>>
 
@@ -30,7 +34,5 @@ Implemented ideas are written with a gray color.
 - Some simple markdown syntax are still not working. Indentify and fix them
 
 - Graphing functions needs improvements...
-- inline rendering for code snippets and math expression are not working. Fix them. 
-- HTML white space entity is persisting when there is a white space between grave marks...
 
 - general code refactoring, documenting and simplifying go without saying...
