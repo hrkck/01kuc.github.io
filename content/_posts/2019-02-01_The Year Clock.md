@@ -14,8 +14,8 @@ here is an idea that struck to Niko on an evening of January… :
                       oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
                         let inception = new Date('January 17, 2019 22:10:00');
                         let now = new Date();
-                        let deg = (360/365) * Math.floor((now-inception)/(1000\*60\*60*24)); // convert miliseconds to degrees
-                        vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
+                        let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
+                        setTimeout(()=>{vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)")},1000)
                       }
                     })    
 `) >>>
@@ -25,15 +25,10 @@ This picture will rotate clock-wise by .986 degree a day. For instance, in 365 d
 
 A simple `new_Date()` output controls rotation of the image and that does the js trick.
 
-<<< code(`block`, `m('img.tommy-niko-jasmin-hakki', {
-  src: 'content/media/tommy-niko-jasmin-hakki.png', 
-  alt: 'tommy-niko-jasmin-hakki',
-  //https://stackoverflow.com/a/51817813/6025059
-  oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
-    let inception = new Date('January 17, 2019 22:10:00');
-    let now = new Date();
-    let deg = (360/365) * Math.floor((now-inception)/(1000\*60\*60*24)); // convert miliseconds to degrees
-    vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)");
-  }
-  })
+<<< code(`oncreate: (vnode)=>{ // use vnode not 'e'!!! AND USE ONLY MITHRILS LIFECYCLES METHODS!
+  let inception = new Date('January 17, 2019 22:10:00');
+  let now = new Date();
+  let deg = (360/365) * Math.floor((now-inception)/(1000*60*60*24)); // convert miliseconds to degrees
+  setTimeout(()=>{vnode.dom.setAttribute("style", "transform: rotate(" + deg + "deg)")},1000)
+}
 `) >>>
