@@ -5,18 +5,16 @@ url: katex_example
 baseUrl: FeaturesPage
 date: 2019-01-31
 ---
-I am using [KaTeX](https://katex.org/) to render my mathematical functions. Currently, they can't be inline. 
+I am using [KaTeX](https://katex.org/) to render my mathematical functions.
 
-But I intend to solve this problem by interfering with the converter functions of rendering special expressions. If the expressions that are meant to be inline are processed together, then things can be made inline or block at will. 
+<<< hyperscript(`m('p',	
+		'an inline math expression, ', 
+		math('x = oo'), 
+		' more inline text ', 
+		)`) >>> 
+ 
+and a block math...
 
-a block math expression,
-
-<<< math(`block`, `i = oo`) >>>
-\n
-
-another...
-
-<<< math(`block`, `sum_(i=1)^(n)i^3 = ((n(n+1))/2)^2`) >>>
-\n
+<<< math(`sum_(i=1)^(n)i^3 = ((n(n+1))/2)^2`) >>> \n
 
 and markdown continues here.

@@ -21,17 +21,22 @@ const CreatePost = () => {
 	let content_rendered = ''
 
 
-	let specFuncNames = ['code','graph','math','html','hyperscript','markdown','image','link']
+	let specFuncNames = ['code','graph','math-block','math-inline','html','hyperscript','markdown','image','link']
 	addSpecFun = function(e) {
 		const specFun = e.target.value.split(' ')[1]
 		console.log(specFun)
 
 		let head = '\n<<< '
-		let tail = ' >>>\n\n'
+		let tail = ' >>> \n \n'
 
 		if(specFun === 'code') content += head + specFun+'(`block`, `code_highlight`)' + tail
 		else if(specFun === 'graph') content += head + specFun+'(10, 2, `x`)' + tail
-		else if(specFun === 'math') content += head + specFun+'(`block`, `f(x) = y`)' + tail
+		else if(specFun === 'math-block') content += head + specFun.split('-')[0] +'(`f(x) = y`)' + tail
+		else if(specFun === 'math-inline') content += head + `hyperscript(\`m('p',	
+		'an inline math expression, ', 
+		math('i = oo'), 
+		' more inline text ', 
+		)\`)` + tail
 		else if(specFun === 'html') content += head + specFun+'(`<p>html</p>`)' + tail
 		else if(specFun === 'hyperscript') content += head + specFun+'(`m(\'p\',\'hyperscript\')`)' + tail
 		else if(specFun === 'markdown') content += head + specFun+'(`####markdown`)' + tail
