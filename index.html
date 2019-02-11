@@ -4,11 +4,21 @@
     <meta charset="utf-8">
     <title>ADHD blog made in Mithril...</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./src/styles/favicon-32x32.png">
-    <link rel="stylesheet" href="src/helpers/katex/katex.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/cdn/katex/katex.min.css">
+    <link rel="stylesheet" href="src/cdn/katex/katex.min.js">
+
+    <link rel="stylesheet" href="./src/cdn/bootstrap.min.css">
+    
+    <script src="./src/cdn/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="./src/cdn/semantic.min.css">
+    <script src="./src/cdn/semantic.min.js"></script>
     <link rel="stylesheet" href="./src/styles/master.css">
   </head>
   <body>
+
     <script src="bin/app.js" charset="utf-8"></script>
+    <script>
+      $('.ui.checkbox').checkbox(); // https://stackoverflow.com/a/34702241/6025059 
+    </script>
   </body>
 </html>
