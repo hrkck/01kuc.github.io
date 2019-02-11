@@ -8,6 +8,7 @@ const m = require('mithril')
 
 const parseMarkdown = require('../helpers/parseMarkdown')
 const LayoutPostSolo = require('./LayoutPostSolo')
+const htmlToHyperscript = require('../helpers/htmlToHyperscript')
 
 
 // This is a closure! //  https://how-to-mithril.js.org/#!/ -> simple closure comp
@@ -19,6 +20,9 @@ const CreatePost = () => {
 	let front_matter_parsed = {'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now}
 	let content = localStorage['postContent'] || "Please don't \`XSS\` me! But if you do, tell me how..."
 	let content_rendered = ''
+
+	let rawHTML = ''
+	let convertedHyperscript = ''
 
 
 	let specFuncNames = ['code','graph','math-block','math-inline','html','hyperscript','markdown','image','link']
@@ -56,6 +60,12 @@ const CreatePost = () => {
 		content = e.target.value
 		localStorage['postContent'] = content
 		content_rendered = parseMarkdown(content)
+	}
+
+	convertHTML = function(e) {
+		rawHTML = e.target.value
+		convertedHyperscript = htmlToHyperscript({ source: rawHTML, indent: '2'})
+		console.log(String(convertedHyperscript))
 	}
 
 
@@ -101,7 +111,17 @@ const CreatePost = () => {
 							m('div.col-6.word-wrap', content_rendered)
 						),
 						m('input.btn.btn-danger[type=button][value="delete content"]', { onclick: ()=>{content=''}}, ''),
-						m('p.small.text-danger', '(ctrl+z is not gonna bring it back!)')
+						m('p.small.text-danger', '(ctrl+z is not gonna bring it back!)'),
+						m('h3','HTML to Hyperscript converter'),
+						m('p','This is particularly useful when combined with the tools above, it allows to quickly prototype a page.'),
+						m('div.container.row',
+						m('p.col-6', 'Enter HTML:'),
+						m('p.col-6', 'See and edit Hyperscipt further'),
+						m('textarea.col-6[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: convertHTML, value: rawHTML}),
+						m('textarea.col-6[name="hyperscript-area"][style="min-height:70vh;"]', {style:{'white-space':'pre'}}, convertedHyperscript),
+
+						),
+						m('hr'), m('br')
 					)
 				)
 			)
