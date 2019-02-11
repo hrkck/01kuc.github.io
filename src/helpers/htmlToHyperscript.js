@@ -165,27 +165,28 @@ const whitespace = (level, indent) => {
 };
 
 const wrapperTemplate = content => (
-  `[${content}\n]`
+  `[${content}
+  ]`
 );
 
-const contentTemplate = (content, whitespace) => (
-  `\n${whitespace}${content}`
+const contentTemplate = (content) => (
+  ` ${content}`
 );
 
-const singleMithrilNodeTemplate = (mithrilNode, children, whitespace) => (
-  `\n${whitespace}m(${mithrilNode})`
+const singleMithrilNodeTemplate = (mithrilNode, whitespace) => (
+  `
+${whitespace}m(${mithrilNode})`
 );
 
 const mithrilNodeMultipleChildrenTemplate = (mithrilNode, children, whitespace, indent) => (
-  `\n${whitespace}m(${mithrilNode},
-${whitespace}${indent}[${children}
-${whitespace}${indent}]
-${whitespace})`
+  `
+${whitespace}m(${mithrilNode},${children}
+${whitespace}${indent})`
 );
 
 const mithrilNodeSingleChildTemplate = (mithrilNode, child, whitespace) => (
-  `\n${whitespace}m(${mithrilNode}, ${child}
-${whitespace})`
+  `
+${whitespace}m(${mithrilNode}, ${child})`
 );
 
 const template = (mithrilNode, children, whitespace, indent) => (
