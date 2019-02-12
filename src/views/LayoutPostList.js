@@ -6,7 +6,7 @@ const Link = require('./Link')
 
 const LayoutPostList = {
   view: vnode =>
-    m('div.container', {id: vnode.attrs.URL},
+    m('div', {id: vnode.attrs.URL},
       m(Link, {link: vnode.attrs.URL}, markdown('#'+vnode.attrs.title)),
       m('section', vnode.children)
   )
