@@ -9,12 +9,15 @@ const ListTags = require('./ListTags')
 
 
 const SearchSection = {
-  view: () => 
-    m('div.container-flow.row.border.align-items-center', 
-      m(SearchBox),
-      m(SearchType),
-      m(ListTags),
-      SearchTag(state.searchedTag, state.searchDisplayType),
+  view: () =>
+    m("nav.navbar.navbar-light", { style: { "background-color": "#e3f2fd" } },
+      m("form.form-inline",
+        m('div.col-lg-3.col-md-6.col-sm-9', m(SearchBox)),
+        m('div.col-lg-3.col-md-4.col-sm-6', m(SearchType)),
+        m('div.col-lg-6.col-md-12', m(ListTags)),
+        m('.mt-2.mb-5'),
+        m('div.col-12', SearchTag(state.searchedTag, state.searchDisplayType)),
+      )
     )
 }
 

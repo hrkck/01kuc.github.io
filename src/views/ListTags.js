@@ -6,22 +6,20 @@ const m = require('mithril')
 const state = require('../models/state')
 
 
-const ListTags = () => {  
-  handleClick = (e) => {
-    state.searchedTag = e.originalTarget.attributes.value.value
-    state.filterListedTags()
-  }
+const ListTags = () => {
+  handleClick = (e) => state.changeSearchedTag(e.originalTarget.attributes.value.value)
+
   hyperTag = {
-    view: (vnode) => 
-      m("span.small.text-primary", 
-        m("a",  {onclick: handleClick, value: vnode.attrs.v}, vnode.attrs.t),
-      ', ')
+    view: (vnode) =>
+      m("span.small",
+        m("a.text-primary", { onclick: handleClick, value: vnode.attrs.v }, vnode.attrs.t),
+        ', ')
   }
 
   return {
-    view: () => 
-      m('div.col',
-        [m(hyperTag, {v:'',t:'EMPTY'})].concat(state.listedTags.map(t=>m(hyperTag, {v:t,t:t})))
+    view: () =>
+      m('div.container.border.border-info',
+        state.listedTags.map(t => m(hyperTag, { v: t, t: t }))
       )
   }
 }
