@@ -13,15 +13,15 @@ const ListTags = () => {
   }
   hyperTag = {
     view: (vnode) => 
-      m('span.small', 
-        m('a.text-primary', {onclick: handleClick, value: vnode.attrs.v}, vnode.attrs.t),
+      m("span.small.text-primary", 
+        m("a",  {onclick: handleClick, value: vnode.attrs.v}, vnode.attrs.t),
       ', ')
   }
 
   return {
     view: () => 
       m('div.col',
-        m('ul', [m(hyperTag, {v:'',t:'EMPTY'})].concat(state.listedTags.map(t=>m(hyperTag, {v:t,t:t}))))
+        [m(hyperTag, {v:'',t:'EMPTY'})].concat(state.listedTags.map(t=>m(hyperTag, {v:t,t:t})))
       )
   }
 }
