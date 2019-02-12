@@ -1,7 +1,11 @@
 {
   "name": "ArcheTypum",
   "version": "1.0.0",
-  "description": "",
+  "description": "my personal blog made in mithril.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:archetypum/archetypum.github.io.git"
+  },
   "homepage": "https://archetypum.github.io",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
