@@ -10,16 +10,20 @@ let state = {
     state.searchedTag = e.target.value
     state.filterListedTags()
   },
-  
-  searchDisplayType: localStorage['isDisplay'] == 'header_post'? true:false,
+  changeSearchedTag: (tag) => {
+    state.searchedTag = tag
+    state.filterListedTags()
+  },
+
+  searchDisplayType: localStorage['isDisplay'] == 'header_post' ? true : false,
   searchDisplayTypeReducer: (boolVal) => state.searchDisplayType = boolVal,
 
   listedTags: posts.map(post => post.tags).join(',').split(',').filter((v, i, a) => a.indexOf(v) === i),
   filterListedTags: () => {
     let all_tags = posts.map(post => post.tags).join(',').split(',').filter((v, i, a) => a.indexOf(v) === i)
     state.listedTags = []
-    for(let tag of all_tags){
-      if(state.searchedTag.split(',').some(targetTag => tag.toLowerCase().includes(targetTag.toLowerCase()))){
+    for (let tag of all_tags) {
+      if (state.searchedTag.split(',').some(targetTag => tag.toLowerCase().includes(targetTag.toLowerCase()))) {
         state.listedTags.push(tag)
       }
     }

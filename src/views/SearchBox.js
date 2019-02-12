@@ -6,11 +6,13 @@ const m = require('mithril')
 const state = require('../models/state')
 
 
-const SearchBox = () => {  
+const SearchBox = () => {
   return {
     view: () =>
-      m('div',
-        m('input[type="text"][placeholder="search a tag"]', {value: state.searchedTag, oninput: state.searchTag})
+      m(".input-group.mb-3",
+        m("input.form-control[aria-describedby='SearchTags'][aria-label='SearchTags'][placeholder='search tags'][type='text']", { value: state.searchedTag, oninput: state.searchTag }),
+        m(".input-group-append",
+          m("button.btn.btn-outline-secondary[id='SearchTagsCancelButton'][type='button']", { onclick: () => { state.changeSearchedTag('') } }, m.trust("&times;")))
       )
   }
 }

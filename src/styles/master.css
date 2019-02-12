@@ -1,15 +1,3 @@
-body{
-  background-image: url('gray.png');
-  background-repeat: repeat;
-  background-color: rgb(225,225,225); 
-}
-
-div{
-  background-image: url('lightnoise.png');
-  background-repeat: repeat;
-  background-color: rgb(250, 250, 250);
-}
-
 pre, code{
   padding: 5px;
   font-family : monospace;
