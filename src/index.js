@@ -10,10 +10,12 @@ const Link = require('./views/Link')
 
 const Main = {
   view: () =>
-    m('div.container.bg-noisy',
-      m('h2', 'Hello World! made in Mithril js'),
-      m('p', 'Lest it becomes as strong as Mithril from Misty Mountains...'),
-      m('p', m(Link, {link: 'CreatePost'}, 'click here to create a post -> ')),
+    m('div.container.p-0',
+      m('div.container',
+        m('h2', 'Hello World! made in Mithril js'),
+        m('p', 'Lest it becomes as strong as Mithril from Misty Mountains...'),
+        m('p', m(Link, {link: 'CreatePost'}, 'click here to create a post -> ')),
+      ),
       m(SearchSection),
     )
 }
