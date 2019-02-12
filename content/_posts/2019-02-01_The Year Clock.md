@@ -7,7 +7,7 @@ date: 2019-02-01
 ---
 here is an idea that struck to Niko on an evening of January… :
 
-<<< hyperscript(`m('img.tommy-niko-jasmin-hakki', {
+<<< hyperscript(`m('img.tommy-niko-jasmin-hakki.img-fluid', {
                       src: 'content/media/tommy-niko-jasmin-hakki.png', 
                       alt: 'tommy-niko-jasmin-hakki',
                       //https://stackoverflow.com/a/51817813/6025059

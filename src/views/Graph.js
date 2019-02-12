@@ -17,7 +17,7 @@ const style = {
 const Graph = {
   view: (vnode) =>
     m('div',
-      m('canvas', {style: style, id:"", width:'360', height:'360', funcs: vnode.attrs.funcs, oncreate:  vnode.attrs.drawFunc, onupdate: vnode.attrs.drawFunc, limit: vnode.attrs.limit, step: vnode.attrs.step})
+      m('canvas.img-fluid', {style: style, id:"", width:'480', height:'480', funcs: vnode.attrs.funcs, oncreate:  vnode.attrs.drawFunc, onupdate: vnode.attrs.drawFunc, limit: vnode.attrs.limit, step: vnode.attrs.step})
     )
 }
 
