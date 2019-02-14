@@ -9,14 +9,14 @@ const Link = require("./Link")
 
 const FeaturesPage = {
   view: () =>
-    m('div.container.w-75',
+    m('div.container',
       m(Link, {link: ''}, '<- go to the main page'),
       markdown(`
 #This is the Features page
 
 Here you will find a list of posts that demonstrates possible types of content in this website.
       `),
-      SearchTag('features'),
+      SearchTag('features', false),
       m(Link, {link: ''}, '<- go to the main page')
     )
 }
