@@ -79,7 +79,7 @@ const CreatePost = () => {
 		document.body.removeChild(element)
 	}
 	downloadFile = function () {
-		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'] + ".md"
+		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'].replace(/\s/g, '_') + ".md"
 		let text = front_matter(front_matter_parsed) + content
 		download(filename, text)
 	}

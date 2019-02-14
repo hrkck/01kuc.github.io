@@ -1,6 +1,6 @@
 ---
 title: Plotting a function
-tags: plot_function_example,features
+tags: plot function example,features
 url: plot_example
 baseUrl: FeaturesPage
 date: 2019-01-31

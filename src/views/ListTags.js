@@ -7,7 +7,7 @@ const state = require('../models/state')
 
 
 const ListTags = () => {
-  handleClick = (e) => state.changeSearchedTag(e.originalTarget.attributes.value.value)
+  handleClick = (e) => state.changeSearchedTag(state.searchedTag + e.originalTarget.attributes.value.value)
 
   hyperTag = {
     view: (vnode) =>

@@ -1,6 +1,6 @@
 ---
 title: Ideas of improvement on this blog
-tags: this_blog,todos
+tags: this blog,todos
 url: ideas_of_improvements_on_this_blog
 baseUrl: 
 date: 2019-02-01

@@ -1,6 +1,6 @@
 ---
 title: The Year Clock
-tags: a-year-clock
+tags: a year clock
 url: the_year_clock
 baseUrl: 
 date: 2019-02-01

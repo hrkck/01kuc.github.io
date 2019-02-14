@@ -1,6 +1,6 @@
 ---
 title: Code highlighting
-tags: code_highlighting,microlight,features
+tags: code highlighting,microlight,features
 url: microlight_example
 baseUrl: FeaturesPage
 date: 2019-01-31
