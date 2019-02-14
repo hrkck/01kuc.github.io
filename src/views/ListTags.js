@@ -8,8 +8,7 @@ const state = require('../models/state')
 
 const ListTags = () => {
   handleClick = (e) => {
-    state.changeSearchedTag(state.searchedTag + e.explicitOriginalTarget.data)
-    console.log(e.explicitOriginalTarget.data)
+    state.changeSearchedTag(state.searchedTag + e.explicitOriginalTarget.data + ',')
   }
 
   hyperTag = {
