@@ -7,20 +7,14 @@ const state = require('../models/state')
 
 
 const ListTags = () => {
-  handleClick = (e) => {
-    try {
-      state.changeSearchedTag(state.searchedTag + e.explicitOriginalTarget.data + ',') // firefox
-    }catch (er) {
-      if (er instanceof TypeError) {
-          state.changeSearchedTag(state.searchedTag + e.path[1].innerText + ',') // chrome
-      }
-    }
+  handleClick = (tag) => {
+    state.changeSearchedTag(state.searchedTag + tag + ',')
   }
 
   hyperTag = {
     view: (vnode) =>
       m("span.",
-        m("a.small.text-primary", { onclick: handleClick, value: vnode.attrs.v }, m('u',vnode.attrs.t)),
+        m("a.small.text-primary", { onclick: ()=>{handleClick(vnode.attrs.v)}, value: vnode.attrs.v }, m('u',vnode.attrs.t)),
         '  •  ')
   }
 
