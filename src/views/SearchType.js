@@ -10,8 +10,8 @@ const SearchDisplayType = () => {
   let isDisplay = localStorage['isDisplay'] || 'header_post'
   let boolVal = false
 
-  changeDisplay = (e) => {
-    isDisplay = e.target.value
+  changeDisplay = (bool) => {
+    isDisplay = bool
     localStorage['isDisplay'] = isDisplay
     boolVal = isDisplay == 'header_post' ? true : false
     state.searchDisplayTypeReducer(boolVal)
@@ -21,11 +21,11 @@ const SearchDisplayType = () => {
     view: () =>
       m("div",
         m(".custom-control.custom-radio",
-          m("input.custom-control-input[id='displayTypeRadio1'][name='displayType'][type='radio'][value='header_post']", { checked: isDisplay === 'header_post', onchange: changeDisplay }),
+          m("input.custom-control-input[id='displayTypeRadio1'][name='displayType'][type='radio'][value='header_post']", { checked: isDisplay === 'header_post', onchange: (e)=>{changeDisplay(e.target.value)} }),
           m("label.custom-control-label[for='displayTypeRadio1']", "show only header")
         ),
         m(".custom-control.custom-radio",
-          m("input.custom-control-input[id='displayTypeRadio2'][name='displayType'][type='radio'][value='full_post']", { checked: isDisplay === 'full_post', onchange: changeDisplay }),
+          m("input.custom-control-input[id='displayTypeRadio2'][name='displayType'][type='radio'][value='full_post']", { checked: isDisplay === 'full_post', onchange: (e)=>{changeDisplay(e.target.value)} }),
           m("label.custom-control-label[for='displayTypeRadio2']", "show full post")
         )
       )

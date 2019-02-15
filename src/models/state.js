@@ -6,8 +6,8 @@ const posts = require('../../content/all_posts')
 
 let state = {
   searchedTag: '',
-  searchTag: (e) => {
-    state.searchedTag = e.target.value
+  searchTag: (tag) => {
+    state.searchedTag = tag
     state.filterListedTags()
   },
   changeSearchedTag: (tag) => {
