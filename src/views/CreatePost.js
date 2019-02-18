@@ -45,12 +45,14 @@ const CreatePost = () => {
 		if (specFun === specFuncs[7]) content += '\n ![image](url) \n'
 		if (specFun === specFuncs[8]) content += '\n [link](https://duckduckgo.com) \n'
 		if (specFun === specSnips[0]) content += head + `hyperscript(\`m('div.container.text-white.border.border-primary.p-0', 
-		m('div.col-12.bg-primary', math('text(Definition 1.1.1: Definition)')),
+		m('div.col-12.bg-primary', 
+		math('text(Definition 1.1.1: Definition)')),
 		m('div.bg-white.col-12.text-body.text-center', 
 		math('i = oo'))
 		)\`)` + tail
 		if (specFun === specSnips[1]) content += head + `hyperscript(\`m('div.container.text-white.border.border-warning.p-0', 
-		m('div.col-12.bg-warning', math('text(Sätze 1.1.1: Sätze)')),
+		m('div.col-12.bg-warning', 
+		math('text(Sätze 1.1.1: Sätze)')),
 		m('div.bg-white.col-12.text-body.text-center', 
 		math('i = oo'))
 		)\`)` + tail
@@ -73,6 +75,11 @@ const CreatePost = () => {
 	convertHTML = function (value) {
 		rawHTML = value
 		convertedHyperscript = htmlToHyperscript({ source: rawHTML, indent: '2' })
+		renderConvertedHTML(convertedHyperscript)
+	}
+
+	renderConvertedHTML = function (hyperscr){
+		convertedHyperscript = hyperscr
 		convertedHyperscript_rendered = hyperscript(convertedHyperscript)
 	}
 
@@ -171,7 +178,7 @@ const CreatePost = () => {
 						),
 						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
 							m('p', 'See and edit Hyperscipt further:'),
-							m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' } }, convertedHyperscript),
+							m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' }, oninput: (e) => { renderConvertedHTML(e.target.value) }, value: convertedHyperscript }), 
 							m('div.mt-1.mb-5')
 						),
 						m('div.col-md-12.col-lg-4.p-0',
