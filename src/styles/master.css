@@ -10,6 +10,11 @@ pre, code{
 }
 
 
+.katex .base{
+  white-space: normal !important;
+  word-break: break-all;
+}
+
 .tommy-niko-jasmin-hakki{
   width: 360px;
   transition: all 2s ease;
