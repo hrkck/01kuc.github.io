@@ -11,8 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "write-posts": "node src/helpers/generateBlog.js",
     "write-posts-live": "npm run write-posts && node src/helpers/generateBlog.js --watch",
-    "start": "write-posts-live & webpack src/index.js --output bin/app.js -d --watch",
-    "start-live": "write-posts-live & budo --live --open src/index.js:bin/app.js",
+    "start": "npm run write-posts-live & webpack src/index.js --output bin/app.js -d --watch",
+    "start-live": "npm run write-posts-live & budo --live --open src/index.js:bin/app.js",
     "build": "npm run write-posts && webpack src/index.js --output bin/app.js -p",
     "deploy": "npm run build && gh-pages -b master -d ."
   },
