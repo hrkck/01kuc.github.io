@@ -26,10 +26,11 @@ const CreatePost = () => {
 	let convertedHyperscript_rendered = ''
 
 	let specFuncs = ['code', 'graph', 'math-block', 'math-inline', 'html', 'hyperscript', 'markdown', 'image', 'link']
+	let specSnips = ['definition', 'theorem']
 
 	addSpecFun = function (specFun) {
-		let head = '\n\n <<< '
-		let tail = ' >>> \n\n'
+		let head = '\n <<< '
+		let tail = ' >>> \n'
 		if (specFun === specFuncs[0]) content += head + specFun + '(`code_highlight`)' + tail
 		if (specFun === specFuncs[1]) content += head + specFun + '(10, 2, `x`)' + tail
 		if (specFun === specFuncs[2]) content += head + specFun.split('-')[0] + '(`f(x) = y`)' + tail
@@ -43,6 +44,18 @@ const CreatePost = () => {
 		if (specFun === specFuncs[6]) content += head + specFun + '(`####markdown`)' + tail
 		if (specFun === specFuncs[7]) content += '\n ![image](url) \n'
 		if (specFun === specFuncs[8]) content += '\n [link](https://duckduckgo.com) \n'
+		if (specFun === specSnips[0]) content += head + `hyperscript(\`m('div.container.text-white.border.border-primary.p-0', 
+		m('div.col-12.bg-primary', 
+		math('text(Definition 1.1.1: Definition)')),
+		m('div.bg-white.col-12.text-body.text-center', 
+		math('i = oo'))
+		)\`)` + tail
+		if (specFun === specSnips[1]) content += head + `hyperscript(\`m('div.container.text-white.border.border-warning.p-0', 
+		m('div.col-12.bg-warning', 
+		math('text(Sätze 1.1.1: Sätze)')),
+		m('div.bg-white.col-12.text-body.text-center', 
+		math('i = oo'))
+		)\`)` + tail
 		parseContent(content)
 	}
 
@@ -62,6 +75,11 @@ const CreatePost = () => {
 	convertHTML = function (value) {
 		rawHTML = value
 		convertedHyperscript = htmlToHyperscript({ source: rawHTML, indent: '2' })
+		renderConvertedHTML(convertedHyperscript)
+	}
+
+	renderConvertedHTML = function (hyperscr){
+		convertedHyperscript = hyperscr
 		convertedHyperscript_rendered = hyperscript(convertedHyperscript)
 	}
 
@@ -95,7 +113,7 @@ const CreatePost = () => {
 				m("input.form-control.form-control-sm", { id: labelFor, name: name, placeholder: placeholder, type: type, value: value, oninput: (e) => { parseFrontMatter(e.target.name, e.target.value) } }))
 		)
 
-	deleteButton = (toDelete, callFunction) => 
+	deleteButton = (toDelete, callFunction) =>
 		m('div.mt-1.mb-5',
 			m('input.form.control.btn.btn-danger[type=button][value="Delete content"][aria-describedby="deleteContent"]', { onclick: () => { toDelete = ''; callFunction(toDelete); } }, ''),
 			m("small.form-text.text-muted[id='deleteContent']", "(ctrl+z is not gonna bring it back!)"),
@@ -107,7 +125,7 @@ const CreatePost = () => {
 				m('div.container',
 					m("form",
 						m('div', m('hr'), m('h3', 'Front Matter'), m('p', '---')),
-						
+
 						frontMatterInput('frontMatterTitle', 'Title', 'title', 'enter a title', 'text', localStorage['title']),
 						frontMatterInput('frontMatterTags', 'Tags', 'tags', 'enter comma seperated tags', 'text', localStorage['tags']),
 						frontMatterInput('frontMatterURL', 'URL', 'url', 'enter a URL without slash', 'text', localStorage['url']),
@@ -125,6 +143,9 @@ const CreatePost = () => {
 
 					m('div.container.row.btn-group',
 						specFuncs.map(specFun => m('input.btn.btn-primary[type="button"]', { value: 'render ' + specFun, onclick: () => { addSpecFun(specFun) } })),
+					),
+					m('div.container.row.btn-group',
+						specSnips.map(specSnip => m('input.btn.btn-info[type="button"]', { value: 'add ' + specSnip, onclick: () => { addSpecFun(specSnip) } })),
 					),
 
 					m('div.container.row.btn-group.mt-1.mb-1',
@@ -157,7 +178,7 @@ const CreatePost = () => {
 						),
 						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
 							m('p', 'See and edit Hyperscipt further:'),
-							m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' } }, convertedHyperscript),
+							m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' }, oninput: (e) => { renderConvertedHTML(e.target.value) }, value: convertedHyperscript }), 
 							m('div.mt-1.mb-5')
 						),
 						m('div.col-md-12.col-lg-4.p-0',

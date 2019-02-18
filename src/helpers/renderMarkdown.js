@@ -11,7 +11,7 @@ const converter = new showdown.Converter() // init converter
 
 // EXPLAIN WHAT ARE THE `REPLACE` FUNCTIONS!
 const markdown = (str) => Function('m', "return " + htmlToHyperscript({ source: converter.makeHtml(str
-    .replace(/([^-*][^1-9.])( )/g, "$1&nbsp;")).replace(/<img/gm, '<img class="img-fluid"') })
+    .replace(/([^-*1-9.])( )/g, "$1&nbsp;")).replace(/<img/gm, '<img class="img-fluid"') })
     .replace(/&amp;/g, ' ')
     .replace(/&nbsp;|nbsp;/g, ' ')
     )(m)

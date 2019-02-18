@@ -100,16 +100,16 @@ const showAxes = (ctx,axes,steps) => {
   for(let i = xmin; i <= x0*2; i += axes.scale*steps){
     ctx.moveTo(i, y0+axes.scale/4) // goes down // math behind: interval line is so long as quarter of a step (unit: pixel)
     ctx.lineTo(i, y0-axes.scale/4) // goes up
-    ctx.fillText(i/axes.scale - w/(2*axes.scale), i-axes.scale/4, y0+axes.scale) //
+    ctx.fillText(Math.floor(i/axes.scale - w/(2*axes.scale)), i-axes.scale/4, y0+axes.scale) //
   }
   ctx.moveTo(x0, 0)
   for(let i = 0; i <=y0*2; i += axes.scale*steps){
     ctx.moveTo(x0+axes.scale/4, i) // goes left
     ctx.lineTo(x0-axes.scale/4, i) // goes right
-    ctx.fillText(-i/axes.scale + w/(2*axes.scale), x0-axes.scale, i+axes.scale/4) //
+    ctx.fillText(Math.floor(-i/axes.scale + w/(2*axes.scale)), x0-axes.scale, i+axes.scale/4) //
   }
   ctx.moveTo(x0, y0)
-  ctx.fillText(y0, 1, 360)
+  // ctx.fillText(y0, 1, 360)
   ctx.stroke()
 }
 
