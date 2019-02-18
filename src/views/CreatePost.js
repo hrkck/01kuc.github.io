@@ -49,6 +49,7 @@ const CreatePost = () => {
 	parseFrontMatter = function (name, value) {
 		const matter = name
 		front_matter_parsed[matter] = value
+		localStorage[name] = value
 		if (front_matter_parsed['title'] !== '') isButtonDisabled = false
 		else isButtonDisabled = true
 	}
@@ -107,10 +108,10 @@ const CreatePost = () => {
 					m("form",
 						m('div', m('hr'), m('h3', 'Front Matter'), m('p', '---')),
 						
-						frontMatterInput('frontMatterTitle', 'Title', 'title', 'enter a title', 'text'),
-						frontMatterInput('frontMatterTags', 'Tags', 'tags', 'enter comma seperated tags', 'text'),
-						frontMatterInput('frontMatterURL', 'URL', 'url', 'enter a URL without slash', 'text'),
-						frontMatterInput('frontMatterBaseURL', 'BaseURL', 'baseUrl', 'enter a base URL without slash', 'text'),
+						frontMatterInput('frontMatterTitle', 'Title', 'title', 'enter a title', 'text', localStorage['title']),
+						frontMatterInput('frontMatterTags', 'Tags', 'tags', 'enter comma seperated tags', 'text', localStorage['tags']),
+						frontMatterInput('frontMatterURL', 'URL', 'url', 'enter a URL without slash', 'text', localStorage['url']),
+						frontMatterInput('frontMatterBaseURL', 'BaseURL', 'baseUrl', 'enter a base URL without slash', 'text', localStorage['baseUrl']),
 						frontMatterInput('frontMatterDate', 'Date', 'date', 'date is fed automatically', 'date', now)
 					),
 

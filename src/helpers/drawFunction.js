@@ -57,7 +57,8 @@ const draw = (e) => {
   axes.scale = canvas.width/(2*e.attrs.limit)// 18 pixels from x=0 to x=1 !! WOW MATH! or max '10' intervals! VERY IMPORTANT VAR
   axes.doNegativeX = true
 
-  showAxes(ctx,axes,e.attrs.step)
+  let step = e.attrs.step === 0? 1: e.attrs.step
+  showAxes(ctx,axes, step)
   let c = 0
   functions.map(func => {
     funGraph(ctx, axes, func, colors[c++], 2)
