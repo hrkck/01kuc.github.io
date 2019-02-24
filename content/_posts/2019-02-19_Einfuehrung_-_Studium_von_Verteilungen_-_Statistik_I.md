@@ -30,7 +30,7 @@ Fuer kategorische Daten werden in der Regel Kreis oder BalkenDiagremme verwendet
 
 
 ###Diagramme fuer Verteilungen
-(Kapitel 2 is Ross)
+(Kapitel 2 in Ross)
 
 Fuer numerische Daten wird meistens ein **Histogram**  verwendet.
 - Das Interval, in dem sich alle Werte befinden, wird in gleichlange‘Klassen’ unterteilt
@@ -44,7 +44,7 @@ Informationen:
 - Lage (oder Zentrum) und Streuung (oder Variation)
 - Eventuelle Ausreisser
 
-Unser Gehirn ist nicht in der Lage, lange Listen individueller Datenpunkte sinnvoll zu interpretieren ⇒ Histogramm und/oderKennzahlen erleichtern uns das Leben erheblich.
+Unser Gehirn ist nicht in der Lage, lange Listen individueller Datenpunkte sinnvoll zu interpretieren ⇒ Histogramm und/oder Kennzahlen erleichtern uns das Leben erheblich.
 
 ---
 
