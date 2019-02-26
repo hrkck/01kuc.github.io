@@ -9,7 +9,7 @@ const Link = require("./Link")
 
 const FeaturesPage = {
   view: () =>
-    m('div.container',
+    m('div.container.col-6',
       m(Link, {link: ''}, '<- go to the main page'),
       markdown(`
 #This is the Features page
