@@ -103,9 +103,7 @@ const CreatePost = () => {
 		let text = front_matter(front_matter_parsed) + content
 		download(filename, text)
 	}
-
-
-
+	
 	frontMatterInput = (labelFor, label, name, placeholder, type, value) =>
 		m(".form-group.row",
 			m("label.col-sm-2.col-form-label.col-form-label-sm", { for: labelFor }, label),
@@ -113,11 +111,6 @@ const CreatePost = () => {
 				m("input.form-control.form-control-sm", { id: labelFor, name: name, placeholder: placeholder, type: type, value: value, oninput: (e) => { parseFrontMatter(e.target.name, e.target.value) } }))
 		)
 
-	deleteButton = (toDelete, callFunction) =>
-		m('div.mt-1.mb-5',
-			m('input.form.control.btn.btn-danger[type=button][value="Delete content"][aria-describedby="deleteContent"]', { onclick: () => { toDelete = ''; callFunction(toDelete); } }, ''),
-			m("small.form-text.text-muted[id='deleteContent']", "(ctrl+z is not gonna bring it back!)"),
-		)
 
 	return {
 		view: (vnode) =>
@@ -156,7 +149,6 @@ const CreatePost = () => {
 						m('div.col-md-12.col-lg-6.p-0',
 							m('p', 'Enter the post:'),
 							m('textarea.col-12[name="post-content"][style="min-height:70vh;"]', { oninput: (e) => { parseContent(e.target.value) }, onmouseover: (e) => { parseContent(e.target.value) }, value: content }),
-							deleteButton(content, parseContent),
 						),
 						m('div.col-md-12.col-lg-6.p-0',
 							m('p', 'See the result:'),
@@ -174,7 +166,6 @@ const CreatePost = () => {
 						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
 							m('p', 'Enter HTML:'),
 							m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
-							deleteButton(rawHTML, convertHTML),
 						),
 						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
 							m('p', 'See and edit Hyperscipt further:'),
@@ -182,7 +173,7 @@ const CreatePost = () => {
 							m('div.mt-1.mb-5')
 						),
 						m('div.col-md-12.col-lg-4.p-0',
-							m('p', 'See the rendered result of the hyperscript:'),
+							m('p', 'See the rendered hyperscript:'),
 							m('div.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', convertedHyperscript_rendered),
 							m('div.mt-1.mb-5')
 						)

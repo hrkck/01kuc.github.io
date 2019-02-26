@@ -35,8 +35,8 @@ const LayoutPost = {
 }
 
 
-const PostTitle = {view: vnode => markdown('#' + vnode.attrs.title)}
-const PostProperties = {view: vnode => m('p', vnode.attrs.date + ', ' + vnode.attrs.tags + ', ' + vnode.attrs.URL)}
+const PostTitle = {view: vnode => m('div.text-left', markdown('#' + vnode.attrs.title))}
+const PostProperties = {view: vnode => m('.text-left.mb-3',m('small.text-break.text-left.text-muted', vnode.attrs.date + ', ' + vnode.attrs.tags + ', ' + vnode.attrs.URL))}
 const PostContent = {view: vnode => parseMarkdown(vnode.attrs.content)}
 
 
