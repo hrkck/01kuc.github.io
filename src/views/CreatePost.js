@@ -7,7 +7,7 @@
 const m = require('mithril')
 
 const parseMarkdown = require('../helpers/parseMarkdown')
-const LayoutPostSolo = require('./LayoutPostSolo')
+const Link = require('./Link')
 const htmlToHyperscript = require('../helpers/htmlToHyperscript')
 const hyperscript = require('../helpers/renderHyperscript')
 
@@ -114,71 +114,65 @@ const CreatePost = () => {
 
 	return {
 		view: (vnode) =>
-			m(LayoutPostSolo, { baseUrl: '' },
+			m('div.container-fluid',
 				m('div.container',
+					m(Link, {link: ''}, '<- go back '),
 					m("form",
-						m('div', m('hr'), m('h3', 'Front Matter'), m('p', '---')),
-
+						m('div', 
+							m('hr'), 
+							m('h3', 'Front Matter'), 
+							m('p', '---')
+						),
 						frontMatterInput('frontMatterTitle', 'Title', 'title', 'enter a title', 'text', localStorage['title']),
 						frontMatterInput('frontMatterTags', 'Tags', 'tags', 'enter comma seperated tags', 'text', localStorage['tags']),
 						frontMatterInput('frontMatterURL', 'URL', 'url', 'enter a URL without slash', 'text', localStorage['url']),
 						frontMatterInput('frontMatterBaseURL', 'BaseURL', 'baseUrl', 'enter a base URL without slash', 'text', localStorage['baseUrl']),
-						frontMatterInput('frontMatterDate', 'Date', 'date', 'date is fed automatically', 'date', now)
+						frontMatterInput('frontMatterDate', 'Date', 'date', 'date is fed automatically', 'date', now), 
+						m('p', '---'),
+						m('hr'), m('br')
 					),
-
-					m('div', m('p', '---')),
-
-					m('hr'), m('br'),
 
 					m('div',
 						m('h3', 'Content'),
-					),
-
-					m('div.container.row.btn-group',
-						specFuncs.map(specFun => m('input.btn.btn-primary[type="button"]', { value: 'render ' + specFun, onclick: () => { addSpecFun(specFun) } })),
-					),
-					m('div.container.row.btn-group',
-						specSnips.map(specSnip => m('input.btn.btn-info[type="button"]', { value: 'add ' + specSnip, onclick: () => { addSpecFun(specSnip) } })),
-					),
-
-					m('div.container.row.btn-group.mt-1.mb-1',
-						m('input.btn.btn-success[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, ''),
-					),
-
-					m('div.container.row',
-						m('div.col-md-12.col-lg-6.p-0',
-							m('p', 'Enter the post:'),
-							m('textarea.col-12[name="post-content"][style="min-height:70vh;"]', { oninput: (e) => { parseContent(e.target.value) }, onmouseover: (e) => { parseContent(e.target.value) }, value: content }),
+						m('div.container-fluid.row.btn-group.m-0.p-0',
+							specFuncs.map(specFun => m('input.btn.btn-primary[type="button"]', { value: 'render ' + specFun, onclick: () => { addSpecFun(specFun) } })),
+							specSnips.map(specSnip => m('input.btn.btn-info[type="button"]', { value: 'add ' + specSnip, onclick: () => { addSpecFun(specSnip) } })),
 						),
-						m('div.col-md-12.col-lg-6.p-0',
-							m('p', 'See the result:'),
-							m('div.col-12.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', content_rendered)
-						)
+						m('div.container-fluid.row.btn-group.mt-1.mb-1.m-0.p-0',
+							m('input.btn.btn-success[type=button][value="Download this file"]', { onclick: downloadFile, disabled: isButtonDisabled }, ''),
+						),
+						m('div.container-fluid.row.m-0.p-0',
+							m('div.col-md-12.col-lg-6.p-0',
+								m('p', 'Enter the post:'),
+								m('textarea.col-12[name="post-content"][style="min-height:70vh;"]', { oninput: (e) => { parseContent(e.target.value) }, onmouseover: (e) => { parseContent(e.target.value) }, value: content }),
+							),
+							m('div.col-md-12.col-lg-6.p-0',
+								m('p', 'See the result:'),
+								m('div.col-12.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', content_rendered)
+							)
+						),
+						m('hr'),
 					),
-
-					m('hr'),
-
+					
 					m('div',
 						m('h3', 'HTML to Hyperscript converter'),
-					),
-
-					m('div.container.row',
-						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
-							m('p', 'Enter HTML:'),
-							m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
-						),
-						m('div.col-sm-12.col-md-6.col-lg-4.p-0',
-							m('p', 'See and edit Hyperscipt further:'),
-							m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' }, oninput: (e) => { renderConvertedHTML(e.target.value) }, value: convertedHyperscript }), 
-							m('div.mt-1.mb-5')
-						),
-						m('div.col-md-12.col-lg-4.p-0',
-							m('p', 'See the rendered hyperscript:'),
-							m('div.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', convertedHyperscript_rendered),
-							m('div.mt-1.mb-5')
+						m('.container-fluid.row.m-0.p-0',
+							m('div.col-sm-12.col-md-6.col-lg-4.p-0',
+								m('p', 'Enter HTML:'),
+								m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
+							),
+							m('div.col-sm-12.col-md-6.col-lg-4.p-0',
+								m('p', 'See and edit Hyperscipt further:'),
+								m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' }, oninput: (e) => { renderConvertedHTML(e.target.value) }, value: convertedHyperscript }), 
+								m('div.mt-1.mb-5')
+							),
+							m('div.col-md-12.col-lg-4.p-0',
+								m('p', 'See the rendered hyperscript:'),
+								m('div.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', convertedHyperscript_rendered),
+								m('div.mt-1.mb-5')
+							)
 						)
 					),
-
 					m('hr'), m('br')
 				)
 			)
