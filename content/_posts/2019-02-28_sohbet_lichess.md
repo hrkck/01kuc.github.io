@@ -1,5 +1,5 @@
 ---
-title: sohbet lichess
+title: Sohbet lichess
 tags: 
 url: sohbet_lichess
 baseUrl: 

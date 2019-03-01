@@ -5,11 +5,10 @@
 // https://stackoverflow.com/questions/45831191/generate-and-download-file-from-js
 
 const m = require('mithril')
+const posts = require('../../content/all_posts')
 
 const parseMarkdown = require('../helpers/parseMarkdown')
 const Link = require('./Link')
-const htmlToHyperscript = require('../helpers/htmlToHyperscript')
-const hyperscript = require('../helpers/renderHyperscript')
 
 
 // This is a closure! //  https://how-to-mithril.js.org/#!/ -> simple closure comp
@@ -17,13 +16,12 @@ const CreatePost = () => {
 	let now = new Date().toJSON().substring(0, 10)
 	let isButtonDisabled = true
 
+	let isShowTitlesChecked = false
+	let areTitlesVisible = 'collapse'
+
 	let front_matter_parsed = { 'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now }
 	let content = localStorage['postContent'] || "Start typing your post here!"
 	let content_rendered = ''
-
-	let rawHTML = ''
-	let convertedHyperscript = ''
-	let convertedHyperscript_rendered = ''
 
 	let specFuncs = ['code', 'graph', 'math-block', 'math-inline', 'html', 'hyperscript', 'markdown', 'image', 'link']
 	let specSnips = ['definition', 'theorem']
@@ -59,6 +57,20 @@ const CreatePost = () => {
 		parseContent(content)
 	}
 
+	front_matter = function (parsed) {
+		return '---\ntitle: ' + parsed['title'] + '\ntags: ' + parsed['tags'] + '\nurl: ' + parsed['url'] + '\nbaseUrl: ' + parsed['baseUrl'] + '\ndate: ' + now + '\n---\n' // for files 
+	}
+
+	function parsePost(md_file){
+		let [front_matter, body] = md_file.replace('---\n', '').split('\n---\n')
+		let post = {markdown: body}
+		front_matter.split('\n').forEach(line => {
+			let [key, val] = line.split(/: (.+)/)
+			post[key] = val
+		})
+		console.log("generated post: " + JSON.stringify(post))
+		return post
+	}
 	parseFrontMatter = function (name, value) {
 		const matter = name
 		front_matter_parsed[matter] = value
@@ -71,18 +83,7 @@ const CreatePost = () => {
 		localStorage['postContent'] = value
 		content_rendered = parseMarkdown(value)
 	}
-
-	convertHTML = function (value) {
-		rawHTML = value
-		convertedHyperscript = htmlToHyperscript({ source: rawHTML, indent: '2' })
-		renderConvertedHTML(convertedHyperscript)
-	}
-
-	renderConvertedHTML = function (hyperscr){
-		convertedHyperscript = hyperscr
-		convertedHyperscript_rendered = hyperscript(convertedHyperscript)
-	}
-
+	
 	// https://stackoverflow.com/a/45831280/6025059
 	download = function (filename, text) {
 		var element = document.createElement('a')
@@ -94,16 +95,26 @@ const CreatePost = () => {
 		document.body.removeChild(element)
 	}
 
-	front_matter = function (parsed) {
-		return '---\ntitle: ' + parsed['title'] + '\ntags: ' + parsed['tags'] + '\nurl: ' + parsed['url'] + '\nbaseUrl: ' + parsed['baseUrl'] + '\ndate: ' + now + '\n---\n' // for files 
-	}
-
 	downloadFile = function () {
 		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'].replace(/\s/g, '_') + ".md"
 		let text = front_matter(front_matter_parsed) + content
 		download(filename, text)
 	}
 	
+	showTitles = function(isChecked){
+		isShowTitlesChecked = isChecked
+		isChecked === false ? areTitlesVisible = 'collapse' : areTitlesVisible = ''
+	}
+	
+	loadPost = function(post){
+		parseFrontMatter('title', post.title)
+		parseFrontMatter('tags', post.tags)
+		parseFrontMatter('url', post.url)
+		parseFrontMatter('baseUrl', post.baseUrl==undefined?'':post.baseUrl)
+		
+		parseContent(post.markdown)
+	}
+
 	frontMatterInput = (labelFor, label, name, placeholder, type, value) =>
 		m(".form-group.row",
 			m("label.col-sm-2.col-form-label.col-form-label-sm", { for: labelFor }, label),
@@ -111,23 +122,37 @@ const CreatePost = () => {
 				m("input.form-control.form-control-sm", { id: labelFor, name: name, placeholder: placeholder, type: type, value: value, oninput: (e) => { parseFrontMatter(e.target.name, e.target.value) } }))
 		)
 
-
 	return {
-		view: (vnode) =>
+		view: () =>
 			m('div.container-fluid',
 				m('div.container',
-					m(Link, {link: ''}, '<- go back '),
+					m(Link, { link: '' }, '<- go back '),
+
+					m('div',
+						m('hr'),
+						m('h4', 'Upload a previous post'),
+
+						m(".form-check",
+							m("input.form-check-input[id='defaultCheck1'][type='checkbox'][value='']", { checked: isShowTitlesChecked, oninput: (e) => {showTitles(e.target.checked)} }),
+							m("label.form-check-label[for='defaultCheck1']", "Show posts")
+						),
+
+						m('div', { class: areTitlesVisible }, 
+							posts.map(post => m('a.small.text-primary.container.row', { class:'', onclick: ()=>{{showTitles(false); loadPost(post)}} }, post.title)),
+						)
+					),
+
 					m("form",
-						m('div', 
-							m('hr'), 
-							m('h3', 'Front Matter'), 
+						m('div',
+							m('hr'),
+							m('h3', 'Front Matter'),
 							m('p', '---')
 						),
 						frontMatterInput('frontMatterTitle', 'Title', 'title', 'enter a title', 'text', localStorage['title']),
 						frontMatterInput('frontMatterTags', 'Tags', 'tags', 'enter comma seperated tags', 'text', localStorage['tags']),
 						frontMatterInput('frontMatterURL', 'URL', 'url', 'enter a URL without slash', 'text', localStorage['url']),
 						frontMatterInput('frontMatterBaseURL', 'BaseURL', 'baseUrl', 'enter a base URL without slash', 'text', localStorage['baseUrl']),
-						frontMatterInput('frontMatterDate', 'Date', 'date', 'date is fed automatically', 'date', now), 
+						frontMatterInput('frontMatterDate', 'Date', 'date', 'date is fed automatically', 'date', now),
 						m('p', '---'),
 						m('hr'), m('br')
 					),
@@ -153,27 +178,6 @@ const CreatePost = () => {
 						),
 						m('hr'),
 					),
-					
-					m('div',
-						m('h3', 'HTML to Hyperscript converter'),
-						m('.container-fluid.row.m-0.p-0',
-							m('div.col-sm-12.col-md-6.col-lg-4.p-0',
-								m('p', 'Enter HTML:'),
-								m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
-							),
-							m('div.col-sm-12.col-md-6.col-lg-4.p-0',
-								m('p', 'See and edit Hyperscipt further:'),
-								m('textarea.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', { style: { 'white-space': 'pre' }, oninput: (e) => { renderConvertedHTML(e.target.value) }, value: convertedHyperscript }), 
-								m('div.mt-1.mb-5')
-							),
-							m('div.col-md-12.col-lg-4.p-0',
-								m('p', 'See the rendered hyperscript:'),
-								m('div.col-12.word-wrap.border.border-info[style="min-height:70vh;max-height:70vh;overflow-y: scroll;"]', convertedHyperscript_rendered),
-								m('div.mt-1.mb-5')
-							)
-						)
-					),
-					m('hr'), m('br')
 				)
 			)
 	}

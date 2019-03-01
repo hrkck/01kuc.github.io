@@ -5,6 +5,7 @@ const routes = require('./models/routes')
 const SearchSection = require('./views/SearchSection')
 const FeaturesPage = require('./views/FeaturesPage')
 const CreatePost = require('./views/CreatePost')
+const PrototypePage = require("./views/PrototypePage")
 const Link = require('./views/Link')
 
 const markdown = require('./helpers/renderMarkdown')
@@ -20,8 +21,7 @@ const Main = {
           m("p", 
             "You can search some tags to start reading things. Or check out ", 
             m('span', m(Link, { link: 'CreatePost' }, 'the coolest page')),
-            " on this website, where I actually\
-            write a post, prototype a page or experiment features."
+            " on this website, where I actually write a post for this blog. Also head to ", m('span', m(Link, { link: 'PrototypePage' }, 'this page')), " to see where I prototype a page or experiment features."
           ),
           markdown(`Find me on [github](https://github.com/archetypum), [twitter](https://twitter.com/hakkirizakucuk) or [linkedin](https://www.linkedin.com/in/hrkucuk/)`)
         ]
@@ -34,6 +34,7 @@ const Main = {
 routes.addComponentRoute('', Main)
 routes.addComponentRoute('FeaturesPage', FeaturesPage)
 routes.addComponentRoute('CreatePost', CreatePost)
+routes.addComponentRoute('PrototypePage', PrototypePage)
 routes.addVnodeRoutes() // adds all content to the routes
 
 m.route(document.body, '', routes.routes)
