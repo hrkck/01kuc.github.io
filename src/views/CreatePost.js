@@ -5,6 +5,7 @@
 // https://stackoverflow.com/questions/45831191/generate-and-download-file-from-js
 
 const m = require('mithril')
+const posts = require('../../content/all_posts')
 
 const parseMarkdown = require('../helpers/parseMarkdown')
 const Link = require('./Link')
@@ -14,6 +15,9 @@ const Link = require('./Link')
 const CreatePost = () => {
 	let now = new Date().toJSON().substring(0, 10)
 	let isButtonDisabled = true
+
+	let isShowTitlesChecked = false
+	let areTitlesVisible = 'collapse'
 
 	let front_matter_parsed = { 'title': '', 'tags': '', 'url': '', 'baseUrl': '', 'date': now }
 	let content = localStorage['postContent'] || "Start typing your post here!"
@@ -53,6 +57,20 @@ const CreatePost = () => {
 		parseContent(content)
 	}
 
+	front_matter = function (parsed) {
+		return '---\ntitle: ' + parsed['title'] + '\ntags: ' + parsed['tags'] + '\nurl: ' + parsed['url'] + '\nbaseUrl: ' + parsed['baseUrl'] + '\ndate: ' + now + '\n---\n' // for files 
+	}
+
+	function parsePost(md_file){
+		let [front_matter, body] = md_file.replace('---\n', '').split('\n---\n')
+		let post = {markdown: body}
+		front_matter.split('\n').forEach(line => {
+			let [key, val] = line.split(/: (.+)/)
+			post[key] = val
+		})
+		console.log("generated post: " + JSON.stringify(post))
+		return post
+	}
 	parseFrontMatter = function (name, value) {
 		const matter = name
 		front_matter_parsed[matter] = value
@@ -65,7 +83,7 @@ const CreatePost = () => {
 		localStorage['postContent'] = value
 		content_rendered = parseMarkdown(value)
 	}
-
+	
 	// https://stackoverflow.com/a/45831280/6025059
 	download = function (filename, text) {
 		var element = document.createElement('a')
@@ -77,14 +95,24 @@ const CreatePost = () => {
 		document.body.removeChild(element)
 	}
 
-	front_matter = function (parsed) {
-		return '---\ntitle: ' + parsed['title'] + '\ntags: ' + parsed['tags'] + '\nurl: ' + parsed['url'] + '\nbaseUrl: ' + parsed['baseUrl'] + '\ndate: ' + now + '\n---\n' // for files 
-	}
-
 	downloadFile = function () {
 		let filename = front_matter_parsed['date'] + '_' + front_matter_parsed['title'].replace(/\s/g, '_') + ".md"
 		let text = front_matter(front_matter_parsed) + content
 		download(filename, text)
+	}
+	
+	showTitles = function(isChecked){
+		isShowTitlesChecked = isChecked
+		isChecked === false ? areTitlesVisible = 'collapse' : areTitlesVisible = ''
+	}
+	
+	loadPost = function(post){
+		parseFrontMatter('title', post.title)
+		parseFrontMatter('tags', post.tags)
+		parseFrontMatter('url', post.url)
+		parseFrontMatter('baseUrl', post.baseUrl==undefined?'':post.baseUrl)
+		
+		parseContent(post.markdown)
 	}
 
 	frontMatterInput = (labelFor, label, name, placeholder, type, value) =>
@@ -102,7 +130,16 @@ const CreatePost = () => {
 
 					m('div',
 						m('hr'),
-						m('h4', 'Upload a previous post')
+						m('h4', 'Upload a previous post'),
+
+						m(".form-check",
+							m("input.form-check-input[id='defaultCheck1'][type='checkbox'][value='']", { checked: isShowTitlesChecked, oninput: (e) => {showTitles(e.target.checked)} }),
+							m("label.form-check-label[for='defaultCheck1']", "Show posts")
+						),
+
+						m('div', { class: areTitlesVisible }, 
+							posts.map(post => m('a.small.text-primary.container.row', { class:'', onclick: ()=>{{showTitles(false); loadPost(post)}} }, post.title)),
+						)
 					),
 
 					m("form",
