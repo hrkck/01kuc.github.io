@@ -11,12 +11,13 @@ const hyperscript = require('../helpers/renderHyperscript')
 
 const PrototypePage = () => {
 
-  let rawHTML = ''
+  let rawHTML = localStorage['rawHTML'] || ''
   let convertedHyperscript = ''
   let convertedHyperscript_rendered = ''
 
   convertHTML = function (value) {
     rawHTML = value
+    localStorage['rawHTML'] = value
     convertedHyperscript = htmlToHyperscript({ source: rawHTML, indent: '2' })
     renderConvertedHTML(convertedHyperscript)
   }
@@ -40,7 +41,7 @@ const PrototypePage = () => {
             m('.container-fluid.row.m-0.p-0',
               m('div.col-sm-12.col-md-6.col-lg-4.p-0',
                 m('p', 'Enter HTML:'),
-                m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
+                m('textarea.col-12[name="rawHTML-area"][style="min-height:70vh;"]', { oninput: (e) => { convertHTML(e.target.value) }, onmouseover: (e) => { convertHTML(e.target.value) }, value: rawHTML }),
               ),
               m('div.col-sm-12.col-md-6.col-lg-4.p-0',
                 m('p', 'See and edit Hyperscipt further:'),
