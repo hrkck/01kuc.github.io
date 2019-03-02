@@ -1,6 +1,6 @@
 ---
 title: Reading list on SPAs
-tags: reading list,SPAs
+tags: reading_list,SPAs
 url: reading_list_on_spas
 baseUrl: 
 date: 2019-02-01

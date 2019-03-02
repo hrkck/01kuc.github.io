@@ -1,6 +1,6 @@
 ---
 title: Markdown Rendering
-tags: markdown rendering,features
+tags: markdown_rendering,features
 url: markdown_rendering
 baseUrl: FeaturesPage
 date: 2019-01-31

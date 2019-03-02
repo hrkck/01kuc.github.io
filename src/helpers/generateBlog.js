@@ -27,7 +27,9 @@ function parsePost(md_file){
   let [front_matter, body] = md_file.replace('---\n', '').split('\n---\n')
   let post = {markdown: body}
   front_matter.split('\n').forEach(line => {
-    let [key, val] = line.split(/: (.+)/)
+    let [key, val] = line.split(/: /)
+    val = val==undefined?'':val
+    console.log(key, val)
     post[key] = val
   })
   console.log("generated post: " + JSON.stringify(post))

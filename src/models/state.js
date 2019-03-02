@@ -17,8 +17,7 @@ let state = {
 
   searchDisplayType: localStorage['isDisplay'] == 'header_post' ? true : false,
   searchDisplayTypeReducer: (boolVal) => state.searchDisplayType = boolVal,
-
-  listedTags: posts.map(post => post.tags).join(',').split(',').filter((v, i, a) => a.indexOf(v) === i).sort(function (a, b) {
+  listedTags: posts.map(post => post.tags).filter(function(tag){return tag!==''}).join(',').split(',').filter((v, i, a) => a.indexOf(v) === i).sort(function (a, b) {
     return a.toLowerCase().localeCompare(b.toLowerCase());
   }),
   filterListedTags: () => {
