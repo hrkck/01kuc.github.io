@@ -2,6 +2,7 @@
 // Parse a markdown file that includes my special functions.
 // All the special functions' file names start with 'render' in this folder.
 
+const m = require('mithril');
 const markdown = require('./renderMarkdown')
 const graph = require('./renderGraph')
 const code = require('./renderCode')
@@ -10,7 +11,7 @@ const html = require('./renderHTML')
 const hyperscript = require('./renderHyperscript')
 
 
-let destringify = (funStr) => Function('markdown, graph, code, math, html, hyperscript', 'return ' + funStr)(markdown, graph, code, math, html, hyperscript)
+let destringify = (funStr) => Function('m, markdown, graph, code, math, html, hyperscript', 'return ' + funStr)(m, markdown, graph, code, math, html, hyperscript)
 
 
 // content: markdown as string

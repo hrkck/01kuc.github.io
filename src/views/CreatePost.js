@@ -134,11 +134,12 @@ const CreatePost = () => {
 
 						m(".form-check",
 							m("input.form-check-input[id='defaultCheck1'][type='checkbox'][value='']", { checked: isShowTitlesChecked, oninput: (e) => {showTitles(e.target.checked)} }),
-							m("label.form-check-label[for='defaultCheck1']", "Show posts")
-						),
-
+							m("label.form-check-label[for='defaultCheck1']", "Show posts"),
+							),
+							
 						m('div', { class: areTitlesVisible }, 
-							posts.map(post => m('a.small.text-primary.container.row', { class:'', onclick: ()=>{{showTitles(false); loadPost(post)}} }, post.title)),
+							m('a.small.text-primary.container.row', { class:'', onclick: ()=>{loadPost({title:'',tags:'',url:'',markdown:''})} }, "~ empty everything ~ "),
+							posts.map(post => m('a.small.text-primary.container.row', { class:'', onclick: ()=>{showTitles(false); loadPost(post)} }, post.title)),
 						)
 					),
 

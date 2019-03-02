@@ -9,12 +9,17 @@ const m = require('mithril');
 const microlight = require('../helpers/microlight')
 
 
-const code = (str) => m('div', 
-  { 
-    oncreate: () => {microlight.reset()}
-  }, 
-  m('pre.microlight', m('code', str))
-)
+const code = (str) => m(block, { str: str })
+
+const block = {
+  view: (vnode) =>
+    m('div', {
+      oncreate: () => { microlight.reset() },
+    },
+      m('pre.microlight', m('code', vnode.attrs.str))
+    )
+}
+
 
 
 module.exports = code
