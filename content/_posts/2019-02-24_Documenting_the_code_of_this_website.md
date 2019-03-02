@@ -1,6 +1,6 @@
 ---
 title: Documenting the code of this website
-tags: jsdoc,javascript,style guide
+tags: jsdoc,javascript,style_guide
 url: documenting_the_code_of_this_website
 baseUrl: 
 date: 2019-02-24

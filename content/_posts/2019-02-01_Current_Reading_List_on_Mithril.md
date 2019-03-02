@@ -1,6 +1,6 @@
 ---
 title: Current Reading List on Mithril
-tags: current,reading list,mithril
+tags: reading_list,mithril
 url: current_reading_list_on_mithril
 baseUrl: 
 date: 2019-02-01

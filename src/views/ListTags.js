@@ -7,14 +7,15 @@ const state = require('../models/state')
 
 
 const ListTags = () => {
-  handleClick = (tag) => {
-    state.changeSearchedTag(state.searchedTag + tag + ',')
-  }
+  handleClick = (tag) => {state.changeSearchedTag(state.searchedTag + tag + ',')}
 
   hyperTag = {
     view: (vnode) =>
       m("span.",
-        m("a.small.text-primary", { onclick: ()=>{handleClick(vnode.attrs.v)}, value: vnode.attrs.v }, m('u',vnode.attrs.t)),
+        m("a.small.text-primary", 
+          { onclick: ()=>{handleClick(vnode.attrs.v)}, value: vnode.attrs.v }, 
+          m('u',vnode.attrs.t)
+        ),
         '  •  ')
   }
 
