@@ -1,7 +1,7 @@
 ---
 title: Introduction to C
 tags: clang,tutorial
-url: 
+url: introduction_to_c
 baseUrl: 
 date: 2019-03-02
 ---
