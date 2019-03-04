@@ -4,13 +4,13 @@
 const m = require('mithril') 
 const markdown = require('../helpers/renderMarkdown')
 const SearchTag = require('../models/SearchTag')
+const LayoutPostList = require('./LayoutPostSolo')
 const Link = require("./Link")
 
 
 const FeaturesPage = {
   view: () =>
-    m('div.container.col-6',
-      m(Link, {link: ''}, '<- go to the main page'),
+    m(LayoutPostList, 
       markdown(`
 #This is the Features page
 
@@ -19,6 +19,8 @@ Here you will find a list of posts that demonstrates possible types of content i
       SearchTag('features', false),
       m(Link, {link: ''}, '<- go to the main page')
     )
+      
+      
 }
 
 
