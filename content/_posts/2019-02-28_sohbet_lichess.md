@@ -1,6 +1,6 @@
 ---
 title: Sohbet lichess
-tags: 
+tags: uncategorized
 url: sohbet_lichess
 baseUrl: 
 date: 2019-02-28
