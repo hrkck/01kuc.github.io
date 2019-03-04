@@ -24,7 +24,8 @@ function readFile(file){
   return md_file
 }
 function parsePost(md_file){
-  let [front_matter, body] = md_file.replace('---\n', '').split('\n---\n')
+  let sep = md_file.replace('---\n', '').split('\n---\n')
+  let [front_matter, body] = [sep.shift(), sep.join('\n---\n')] // reference: https://stackoverflow.com/a/2878726/6025059
   let post = {markdown: body}
   front_matter.split('\n').forEach(line => {
     let [key, val] = line.split(/: /)
