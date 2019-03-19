@@ -2,6 +2,9 @@ const m = require('mithril')
 
 const routes = require('./models/routes')
 
+const PostsByDate = require('./views/PostsByDate')
+
+const NavigationSection = require('./views/NavigationSection')
 const SearchSection = require('./views/SearchSection')
 const FeaturesPage = require('./views/FeaturesPage')
 const CreatePost = require('./views/CreatePost')
@@ -26,7 +29,7 @@ const Main = {
           markdown(`Find me on [github](https://github.com/archetypum), [twitter](https://twitter.com/hakkirizakucuk) or [linkedin](https://www.linkedin.com/in/hrkucuk/)`)
         ]
       ),
-      m(SearchSection),
+      m(NavigationSection, {latest_posts: m('div.col.container', PostsByDate()),search_tag:m(SearchSection)}),
     )
 }
 
