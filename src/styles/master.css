@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll; 
+}
+
 pre, code{
   padding: 3px;
   font-family: monospace;
