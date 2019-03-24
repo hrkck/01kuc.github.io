@@ -11,6 +11,8 @@ const CreatePost = require('./views/CreatePost')
 const PrototypePage = require("./views/PrototypePage")
 const Link = require('./views/Link')
 
+const CountDown = require('./views/CountDown')
+
 const markdown = require('./helpers/renderMarkdown')
 
 const Main = {
@@ -36,6 +38,7 @@ const Main = {
 
 routes.addComponentRoute('', Main)
 routes.addComponentRoute('FeaturesPage', FeaturesPage)
+routes.addComponentRoute('CountDown', CountDown)
 routes.addComponentRoute('CreatePost', CreatePost)
 routes.addComponentRoute('PrototypePage', PrototypePage)
 routes.addVnodeRoutes() // adds all content to the routes
