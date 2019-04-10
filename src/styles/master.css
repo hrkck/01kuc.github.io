@@ -1,5 +1,7 @@
-html {
-  overflow-y: scroll; 
+body {
+  overflow-y: scroll;
+  font-family: 'Fira Sans', sans-serif;
+  padding-top: 18px;
 }
 
 pre, code{
