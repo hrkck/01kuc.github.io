@@ -22,7 +22,11 @@ const ListTags = () => {
   return {
     view: () =>
       m('div',
-        state.listedTags.map(t => m(hyperTag, { v: t, t: t }))
+        state.listedTags.map(t => {
+          if(t !== "uncategorized"){
+            return m(hyperTag, { v: t, t: t })
+          }
+        })
       )
   }
 }
