@@ -8,7 +8,7 @@ const Post = require('./Post')
 
 
 const PostListHeader = (title, tags, url, date) =>
-  m(LayoutPostList, {title: title, URL: url}, Post(' ', tags, url, date, ''))
+  m(LayoutPostList, {title: title, URL: url, date: date}, Post(' ', tags, url, date, ''))
 
 
 module.exports = PostListHeader
