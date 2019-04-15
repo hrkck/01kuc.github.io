@@ -30,7 +30,7 @@ const SearchTag = (targetTag, isDisplayHeader) => {
       list.push(addPost)
     }
   }
-  return list
+  return list.reverse()
 }
 
 
