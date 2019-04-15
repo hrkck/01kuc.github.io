@@ -28,7 +28,7 @@ const Main = {
             m('span', m(Link, { link: 'CreatePost' }, 'the coolest page')),
             " on this website, where I actually write a post for this blog. Also head to ", m('span', m(Link, { link: 'PrototypePage' }, 'this page')), " to see where I prototype a page or experiment features."
           ),
-          markdown(`Find me on [github](https://github.com/archetypum), [twitter](https://twitter.com/hakkirizakucuk) or [linkedin](https://www.linkedin.com/in/hrkucuk/)`)
+          markdown(`Find me on [github](https://github.com/01kuc), [twitter](https://twitter.com/01kuc) or [linkedin](https://www.linkedin.com/in/hrkucuk/)`)
         ]
       ),
       m(NavigationSection, {latest_posts: m('div.col.container', PostsByDate()),search_tag:m(SearchSection)}),
