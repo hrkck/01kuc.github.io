@@ -16,10 +16,10 @@ pre, code{
 }
 
 
-.katex .base{
+/* .katex .base{
   white-space: normal !important;
   word-break: break-all;
-}
+} */
 
 .tommy-niko-jasmin-hakki{
   width: 360px;
