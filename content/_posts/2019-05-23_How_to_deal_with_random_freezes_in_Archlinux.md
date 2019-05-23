@@ -18,7 +18,7 @@ Assuming GRUB is the bootloader, this line should be added to `/etc/default/grub
 
 `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_idle.max_cstate=1"`
 
-... as described in the bug report page.
+... as described in the bug report page. Generate GRUB config and you are good to go.
 
 More info at:
 
