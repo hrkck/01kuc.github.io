@@ -17,15 +17,15 @@
     "deploy": "npm run build && gh-pages -b master -d ."
   },
   "dependencies": {
-    "chokidar": "^2.0.4",
-    "katex": "^0.10.0",
+    "chokidar": "^2.1.6",
+    "katex": "^0.10.2",
     "mithril": "^1.1.6",
     "showdown": "^1.9.0"
   },
   "devDependencies": {
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5"
   },
   "keywords": [],
   "author": "",

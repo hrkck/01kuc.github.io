@@ -9,6 +9,7 @@ const SearchSection = require('./views/SearchSection')
 const FeaturesPage = require('./views/FeaturesPage')
 const CreatePost = require('./views/CreatePost')
 const PrototypePage = require("./views/PrototypePage")
+const TranslateAPI = require("./views/TranslateAPI")
 const Link = require('./views/Link')
 
 const CountDown = require('./views/CountDown')
@@ -41,6 +42,7 @@ routes.addComponentRoute('FeaturesPage', FeaturesPage)
 routes.addComponentRoute('CountDown', CountDown)
 routes.addComponentRoute('CreatePost', CreatePost)
 routes.addComponentRoute('PrototypePage', PrototypePage)
+routes.addComponentRoute('TranslateAPI', TranslateAPI)
 routes.addVnodeRoutes() // adds all content to the routes
 
 m.route(document.body, '', routes.routes)
