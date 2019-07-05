@@ -4,7 +4,6 @@
 const m = require('mithril')
 
 
-
 const TranslateAPI = () => {
   let KEY = "trnsl.1.1.20180724T121917Z.f86593e821feea59.2382b7446bfa437a2a2d70fa363fcf14824c361c"
   let URL_JSON = "https://translate.yandex.net/api/v1.5/tr.json/translate"
@@ -12,12 +11,16 @@ const TranslateAPI = () => {
   let typingTimer // typing identifier
 
   let source, translated = ''
-
   let sourceView, translationsView = m('span', '')
-  let rows = JSON.parse(localStorage.getItem('table')) || []
+
+  let rows = []
+  let checkLocalStorage = localStorage.getItem('table')
+  // 'table' can be null, '[]' or an array of m()'s as a string.
+  checkLocalStorage = checkLocalStorage === null || checkLocalStorage === '[]' ? false : true
+  rows = checkLocalStorage ? JSON.parse(checkLocalStorage) : [] 
 
   let isSaveDisabled = true
-  let isRemoveDisabled = JSON.parse(localStorage.getItem('table')).length === 0 ? true : false
+  let isRemoveDisabled = checkLocalStorage ? false : true
 
   translate = (source) => {
     m.jsonp({
@@ -25,10 +28,8 @@ const TranslateAPI = () => {
       url: URL_JSON+"?key=" + KEY + "&text=" + source + "&lang=de-en",
       header: {"Content-type": "application/x-www-form-urlencoded"}
     })
-    .then(function(items) {
-      if(typeof items.text === 'undefined') return 0
-      else translated = items.text[0]
-    })
+    .then(function(items) {translated = typeof items.text === 'undefined' ? '' : items.text[0]}
+    )
     isSaveDisabled = false
   }
 
@@ -37,6 +38,7 @@ const TranslateAPI = () => {
 
     sourceView = m('td', source)
     translationsView = m('td', translated)
+
     rows.push(m("tr",sourceView,translationsView))
     source = translated = ''
 
