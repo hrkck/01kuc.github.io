@@ -62,7 +62,7 @@ const TranslateAPI = () => {
       m('div.container',
         m('div.row.align-items-baseline',
           m('div.col-4',
-            m("input[type='text'][placeholder='type word or sentence']", {
+            m("input[type='text'][placeholder='type in German']", {
               value: source, 
               oninput:(e)=>{updateInput(e.target.value);},
               onkeyup:(e)=>{
@@ -72,14 +72,14 @@ const TranslateAPI = () => {
               onkeydown:(e) => {clearTimeout(typingTimer)}
           })
           ),
-          m('div.col-4.text-wrap', m('p.m-0', translated || m('p.m-0.text-muted','translation will appear here'))),
-          m('div.col-4', m('input.btn.btn-primary[type=button][value=save translation]', {onclick:()=>{addField()}, disabled: isSaveDisabled})),
+          m('div.col-4.text-wrap', m('p.m-0', translated || m('p.m-0.text-muted','English translation will appear here'))),
+          m('div.col-4', m('input.btn.btn-primary[type=button][value=save translation to the table]', {onclick:()=>{addField()}, disabled: isSaveDisabled})),
 
           m("table.table.mt-5",
             m("thead", 
               m("tr",
-                m("th",  "Source"),
-                m("th",  "Translation"),
+                m("th",  "German"),
+                m("th",  "English"),
               )
             ),
             m("tbody",
