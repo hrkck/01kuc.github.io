@@ -39,7 +39,7 @@ const TranslateAPI = () => {
 
     sourceView = m('td', source)
     translationsView = m('td', translated)
-    table.push(m("tr",sourceView,translationsView))
+    table.unshift(m("tr",sourceView,translationsView))
     source = translated = ''
 
     localStorage.setItem('table', JSON.stringify(table))
