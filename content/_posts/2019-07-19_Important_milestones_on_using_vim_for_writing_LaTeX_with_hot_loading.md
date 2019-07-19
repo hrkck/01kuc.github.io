@@ -14,6 +14,9 @@ In Archlinux, install,
 - [vim-pathogen](https://aur.archlinux.org/packages/vim-pathogen/)
 - [biber](https://www.archlinux.org/packages/community/any/biber/)
 
+Now clone the vim-live-latex-preview repository to your vim's bundle folder:
+
+`git clone https://github.com/ying17zi/vim-live-latex-preview.git .vim/bundle/vim-live-latex-preview`
 
 Add this to the `.vimrc`:
 
